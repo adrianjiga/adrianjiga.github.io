@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automation Practice Form</title>
+  <link rel="stylesheet" href="css/form.css" />
+</head>
+<body>
+  <h1>Automation Practice Form</h1>
+
+  <form id="practice-form" data-cy="practice-form">
+
+    <div class="two-col">
+      <div class="form-group">
+        <label class="field-label" for="firstName">First Name</label>
+        <input type="text" id="firstName" data-cy="first-name-input" placeholder="First Name" />
+      </div>
+      <div class="form-group">
+        <label class="field-label" for="lastName">Last Name</label>
+        <input type="text" id="lastName" data-cy="last-name-input" placeholder="Last Name" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="field-label" for="userEmail">Email</label>
+      <input type="email" id="userEmail" data-cy="email-input" placeholder="name@example.com" />
+    </div>
+
+    <div class="form-group">
+      <label class="field-label">Gender</label>
+      <div class="gender-group" data-cy="gender-group">
+        <input type="radio" id="gender-radio-1" name="gender" value="Male"   data-cy="gender-male"   />
+        <label for="gender-radio-1" data-cy="gender-male-label">Male</label>
+        <input type="radio" id="gender-radio-2" name="gender" value="Female" data-cy="gender-female" />
+        <label for="gender-radio-2" data-cy="gender-female-label">Female</label>
+        <input type="radio" id="gender-radio-3" name="gender" value="Other"  data-cy="gender-other"  />
+        <label for="gender-radio-3" data-cy="gender-other-label">Other</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="field-label" for="userNumber">Mobile</label>
+      <input type="text" id="userNumber" data-cy="mobile-input" placeholder="Mobile Number" />
+    </div>
+
+    <div class="form-group">
+      <label class="field-label" for="dateOfBirthInput">Date of Birth</label>
+      <div class="date-picker-wrapper">
+        <input
+          type="text"
+          id="dateOfBirthInput"
+          data-cy="date-of-birth-input"
+          placeholder="Date of Birth"
+          readonly
+        />
+        <div id="datepicker-popup" data-cy="datepicker-popup" style="display:none;">
+          <div class="date-picker-header">
+            <select id="dp-month" data-cy="month-select">
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+            <select id="dp-year" data-cy="year-select">
+              <!-- populated by DatePicker.init() -->
+            </select>
+          </div>
+          <div class="date-picker-grid" id="dp-days-grid" data-cy="days-grid">
+            <div class="day-name">Su</div>
+            <div class="day-name">Mo</div>
+            <div class="day-name">Tu</div>
+            <div class="day-name">We</div>
+            <div class="day-name">Th</div>
+            <div class="day-name">Fr</div>
+            <div class="day-name">Sa</div>
+            <!-- day cells injected by DatePicker._renderDays() -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="field-label">Subjects</label>
+      <div class="subjects-wrapper" id="subjects-wrapper" data-cy="subjects-wrapper">
+        <div id="subjects-chips" data-cy="subjects-chips"></div>
+        <input
+          type="text"
+          id="subjectsInput"
+          data-cy="subjects-input"
+          placeholder="Select subjects"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="field-label">Hobbies</label>
+      <div class="hobbies-group" data-cy="hobbies-group">
+        <label class="hobby-item" data-cy="hobby-sports-label">
+          <input type="checkbox" id="hobbies-checkbox-1" data-cy="hobby-sports"  value="Sports"  /> Sports
+        </label>
+        <label class="hobby-item" data-cy="hobby-reading-label">
+          <input type="checkbox" id="hobbies-checkbox-2" data-cy="hobby-reading" value="Reading" /> Reading
+        </label>
+        <label class="hobby-item" data-cy="hobby-music-label">
+          <input type="checkbox" id="hobbies-checkbox-3" data-cy="hobby-music"   value="Music"   /> Music
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="field-label" for="uploadPicture">Picture</label>
+      <input type="file" id="uploadPicture" data-cy="upload-picture" />
+    </div>
+
+    <div class="form-group">
+      <label class="field-label" for="currentAddress">Current Address</label>
+      <textarea id="currentAddress" data-cy="address-input" rows="2" placeholder="Current Address"></textarea>
+    </div>
+
+    <div class="two-col">
+      <div class="form-group">
+        <label class="field-label">Country</label>
+        <div id="state" class="select-dropdown" data-cy="state-dropdown">
+          <div class="select-control">
+            <span id="state-display" class="select-placeholder">Select Country</span>
+            <span class="select-arrow">&#9660;</span>
+          </div>
+          <div class="select-menu" id="state-menu" style="display:none;">
+            <div class="select-option" id="state-option-0" data-cy="state-option-germany"     data-state-idx="0">Germany</div>
+            <div class="select-option" id="state-option-1" data-cy="state-option-france"      data-state-idx="1">France</div>
+            <div class="select-option" id="state-option-2" data-cy="state-option-spain"       data-state-idx="2">Spain</div>
+            <div class="select-option" id="state-option-3" data-cy="state-option-italy"       data-state-idx="3">Italy</div>
+            <div class="select-option" id="state-option-4" data-cy="state-option-netherlands" data-state-idx="4">Netherlands</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">City</label>
+        <div id="city" class="select-dropdown" data-cy="city-dropdown">
+          <div class="select-control">
+            <span id="city-display" class="select-placeholder">Select City</span>
+            <span class="select-arrow">&#9660;</span>
+          </div>
+          <div class="select-menu" id="city-menu" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="submit" data-cy="submit-btn">Submit</button>
+  </form>
+
+  <!-- Success modal -->
+  <div class="modal-overlay" id="success-modal" data-cy="success-modal" style="display:none;">
+    <div class="modal-dialog">
+      <div class="modal-content" data-cy="modal-content">
+        <div class="modal-header">
+          <h5 data-cy="modal-title">Thanks for submitting the form</h5>
+        </div>
+        <div class="modal-body">
+          <table data-cy="result-table">
+            <tbody id="result-tbody"></tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button data-cy="close-modal-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/form.js"></script>
+</body>
+</html>

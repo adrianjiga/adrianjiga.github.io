@@ -1,0 +1,268 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 24px;
+  color: #333;
+  background: #f8f9fa;
+}
+
+h1 { font-size: 1.4rem; margin-bottom: 20px; }
+
+.form-group { margin-bottom: 16px; }
+
+label.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* ── Gender radios ────────────────────────────────────────────────────────── */
+
+.gender-group { display: flex; gap: 12px; flex-wrap: wrap; }
+.gender-group input[type="radio"] { display: none; }
+
+.gender-group label {
+  padding: 6px 14px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  background: #e9ecef;
+  transition: background 0.1s;
+}
+
+.gender-group input[type="radio"]:checked + label {
+  background: #0366d6;
+  color: #fff;
+}
+
+/* ── Date picker ──────────────────────────────────────────────────────────── */
+
+.date-picker-wrapper { position: relative; display: inline-block; width: 100%; }
+
+#dateOfBirthInput { cursor: pointer; background: #fff; }
+
+#datepicker-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 260px;
+}
+
+.date-picker-header { display: flex; gap: 8px; margin-bottom: 10px; }
+
+.date-picker-header select {
+  padding: 4px 6px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.date-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.day-name {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  padding: 4px 0;
+}
+
+.day-cell {
+  text-align: center;
+  padding: 5px 3px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.day-cell:hover { background: #e3f0ff; }
+.day-cell--selected { background: #0366d6; color: #fff; }
+
+/* ── Subjects autocomplete ────────────────────────────────────────────────── */
+
+.subjects-wrapper {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  background: #fff;
+  align-items: center;
+  min-height: 38px;
+}
+
+.subject-chip {
+  background: #e3f0ff;
+  color: #0366d6;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.subject-chip .remove { cursor: pointer; font-weight: bold; }
+
+#subjectsInput {
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 120px;
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+/* ── Hobby checkboxes ─────────────────────────────────────────────────────── */
+
+.hobbies-group { display: flex; gap: 16px; }
+
+.hobby-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ── Custom select dropdowns ──────────────────────────────────────────────── */
+
+.select-dropdown {
+  position: relative;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: #fff;
+  min-height: 38px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.select-control {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  min-height: 38px;
+  justify-content: space-between;
+}
+
+.select-value       { font-size: 14px; color: #333; }
+.select-placeholder { font-size: 14px; color: #999; }
+.select-arrow       { font-size: 10px; color: #999; }
+
+.select-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-option { padding: 8px 12px; font-size: 14px; cursor: pointer; }
+.select-option:hover { background: #e3f0ff; }
+
+/* ── Submit ───────────────────────────────────────────────────────────────── */
+
+#submit {
+  padding: 8px 24px;
+  background: #0366d6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+#submit:hover { background: #025bb5; }
+
+/* ── Success modal ────────────────────────────────────────────────────────── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  background: #fff;
+  border-radius: 6px;
+  min-width: 500px;
+  max-width: 90vw;
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h5 { margin: 0; font-size: 1.1rem; }
+
+.modal-body  { padding: 16px 20px; }
+
+.modal-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #dee2e6;
+  text-align: right;
+}
+
+[data-cy="close-modal-btn"] {
+  padding: 6px 16px;
+  background: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table td { padding: 6px 10px; border: 1px solid #dee2e6; }
+table tr:nth-child(even) td { background: #f8f9fa; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
