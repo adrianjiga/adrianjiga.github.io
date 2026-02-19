@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buttons</title>
+  <link rel="stylesheet" href="css/buttons.css" />
+</head>
+<body>
+  <h1>Buttons</h1>
+
+  <div id="buttons-wrapper">
+    <div class="button-section">
+      <button id="doubleClickBtn" data-cy="double-click-btn">Double Click Me</button>
+      <p id="doubleClickMessage" class="result-message" data-cy="double-click-message">You have done a double click</p>
+    </div>
+
+    <div class="button-section">
+      <button id="rightClickBtn" data-cy="right-click-btn">Right Click Me</button>
+      <p id="rightClickMessage" class="result-message" data-cy="right-click-message">You have done a right click</p>
+    </div>
+
+    <div class="button-section">
+      <p id="dynamicClickMessage" class="result-message" data-cy="dynamic-click-message">You have done a dynamic click</p>
+    </div>
+
+    <div class="button-section">
+      <button data-cy="dynamic-click-btn">Click Me</button>
+    </div>
+  </div>
+
+  <script src="js/buttons.js"></script>
+</body>
+</html>
