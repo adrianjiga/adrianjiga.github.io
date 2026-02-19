@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Tables</title>
+  <link rel="stylesheet" href="css/webtables.css" />
+</head>
+<body>
+  <h1>Web Tables</h1>
+
+  <div class="toolbar" data-cy="toolbar">
+    <input
+      type="text"
+      id="searchBox"
+      data-cy="search-box"
+      placeholder="Type to search..."
+    />
+    <button id="addNewRecordButton" data-cy="add-record-btn">+ Add</button>
+  </div>
+
+  <div class="table-wrapper" data-cy="table-wrapper">
+    <table data-cy="table">
+      <thead data-cy="table-header">
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Email</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Department</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="table-body" data-cy="table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="pagination-bar" data-cy="pagination">
+    <button class="pagination-btn -previous" data-cy="prev-page-btn">Previous</button>
+    <div class="page-info" data-cy="page-info">
+      <span>Page</span>
+      <strong id="current-page-num" data-cy="current-page">1</strong>
+      <span>of</span>
+      <span class="-totalPages" id="total-pages-display" data-cy="total-pages">1</span>
+    </div>
+    <button class="pagination-btn -next" data-cy="next-page-btn">Next</button>
+    <div class="rows-per-page">
+      <label for="rows-per-page-sel">Rows per page:</label>
+      <select
+        aria-label="rows per page"
+        id="rows-per-page-sel"
+        data-cy="rows-per-page-select"
+      >
+        <option value="5">5 rows</option>
+        <option value="10" selected>10 rows</option>
+        <option value="20">20 rows</option>
+        <option value="25">25 rows</option>
+        <option value="50">50 rows</option>
+        <option value="100">100 rows</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="js/webtables.js"></script>
+</body>
+</html>
