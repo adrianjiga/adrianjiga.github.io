@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QA Helpers</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 760px;
+      margin: 64px auto;
+      padding: 0 24px;
+      color: #24292e;
+      line-height: 1.6;
+    }
+    h1 { font-size: 2rem; border-bottom: 2px solid #0366d6; padding-bottom: 12px; margin-bottom: 20px; }
+    h2 { font-size: 1.25rem; margin-top: 32px; }
+    p  { font-size: 1rem; color: #444; }
+    a  { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 20px; }
+    li { margin: 10px 0; font-size: 1rem; }
+    .desc { color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>QA Helpers</h1>
+  <p>
+    This section contains helper pages designed as targets for automated testing.
+    Each page replicates specific UI patterns and interaction flows exercised by the Cypress test suite.
+  </p>
+  <p>
+    These pages are self-contained — no external frameworks or APIs required.
+    State is managed entirely in-browser (localStorage where persistence across interactions is needed).
+  </p>
+
+  <h2>Available Pages</h2>
+  <ul>
+    <li>
+      <a href="/qa/helpers/buttons.html">Buttons</a><br />
+      <span class="desc">Double-click, right-click, and dynamic click interactions with result messages.</span>
+    </li>
+    <li>
+      <a href="/qa/helpers/automation-practice-form.html">Automation Practice Form</a><br />
+      <span class="desc">
+        Full registration form with text inputs, radio buttons, a date picker, subjects autocomplete,
+        hobby checkboxes, file upload, and cascading state/city dropdowns.
+      </span>
+    </li>
+    <li>
+      <a href="/qa/helpers/webtables.html">Web Tables</a><br />
+      <span class="desc">
+        CRUD table with search, add/edit/delete rows, rows-per-page selector, and multi-page pagination.
+      </span>
+    </li>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Tables</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 24px;
+      color: #333;
+      background: #f8f9fa;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 16px; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    #searchBox {
+      padding: 7px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 13px;
+      width: 220px;
+      outline: none;
+    }
+    #searchBox:focus { border-color: #80bdff; }
+    #addNewRecordButton {
+      padding: 7px 16px;
+      background: #0366d6;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    #addNewRecordButton:hover { background: #025bb5; }
+
+    /* ReactTable */
+    .ReactTable {
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .rt-thead {
+      display: flex;
+      background: #f1f3f5;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .rt-th {
+      flex: 1;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      border-right: 1px solid #dee2e6;
+      min-width: 0;
+    }
+    .rt-th:last-child { border-right: none; }
+    .rt-tbody { display: block; }
+    .rt-tr-group {
+      border-bottom: 1px solid #f1f3f5;
+    }
+    .rt-tr-group:last-child { border-bottom: none; }
+    .rt-tr-group[role="row"],
+    div[role="row"].rt-tr {
+      display: flex;
+    }
+    .rt-td {
+      flex: 1;
+      padding: 9px 8px;
+      font-size: 13px;
+      border-right: 1px solid #f1f3f5;
+      min-width: 0;
+      word-break: break-word;
+    }
+    .rt-td:last-child { border-right: none; }
+    .rt-tr-group:nth-child(even) .rt-td { background: #fafbfc; }
+
+    /* Action icons */
+    .action-icon {
+      display: inline-block;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 14px;
+      margin-right: 4px;
+    }
+    .action-icon:hover { background: #e9ecef; }
+
+    /* Pagination */
+    .rt-pagination {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-top: 1px solid #dee2e6;
+      background: #f8f9fa;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+    .-previous, .-next {
+      padding: 5px 14px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background: #fff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .-previous:disabled, .-next:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .-previous:not(:disabled):hover, .-next:not(:disabled):hover { background: #e9ecef; }
+    .page-info { display: flex; align-items: center; gap: 8px; }
+    select[aria-label="rows per page"] {
+      padding: 4px 8px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .total-pages-wrap { color: #666; }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 6px;
+      min-width: 460px;
+      max-width: 90vw;
+      padding: 0;
+    }
+    .modal-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .modal-header h5 { margin: 0; font-size: 1rem; font-weight: 600; }
+    .modal-body { padding: 16px 20px; }
+    .modal-footer { padding: 12px 20px; border-top: 1px solid #dee2e6; text-align: right; }
+    .modal-form-group { margin-bottom: 14px; }
+    .modal-form-group label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px; }
+    .modal-form-group input {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 13px;
+      outline: none;
+    }
+    .modal-form-group input:focus { border-color: #80bdff; }
+    #submit {
+      padding: 7px 20px;
+      background: #0366d6;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    #submit:hover { background: #025bb5; }
+    .btn-cancel {
+      padding: 7px 16px;
+      background: #6c757d;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Web Tables</h1>
+
+  <div class="toolbar">
+    <input type="text" id="searchBox" placeholder="Type to search..." oninput="onSearch()" />
+    <button id="addNewRecordButton" onclick="openAddModal()">+ Add</button>
+  </div>
+
+  <div class="ReactTable">
+    <div class="rt-thead">
+      <div class="rt-th">First Name</div>
+      <div class="rt-th">Last Name</div>
+      <div class="rt-th">Age</div>
+      <div class="rt-th">Email</div>
+      <div class="rt-th">Salary</div>
+      <div class="rt-th">Department</div>
+      <div class="rt-th">Action</div>
+    </div>
+    <div class="rt-tbody" id="rt-tbody"></div>
+  </div>
+
+  <div class="rt-pagination">
+    <button class="-previous" onclick="goToPrev()">Previous</button>
+    <div class="page-info">
+      <span>Page</span>
+      <strong id="current-page-num">1</strong>
+      <span>of</span>
+      <span class="-totalPages" id="total-pages-display">1</span>
+    </div>
+    <button class="-next" onclick="goToNext()">Next</button>
+    <div style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+      <label for="rows-per-page-sel" style="font-size:13px;color:#666;">Rows per page:</label>
+      <select aria-label="rows per page" id="rows-per-page-sel" onchange="onRowsPerPageChange()">
+        <option value="5">5 rows</option>
+        <option value="10" selected>10 rows</option>
+        <option value="20">20 rows</option>
+        <option value="25">25 rows</option>
+        <option value="50">50 rows</option>
+        <option value="100">100 rows</option>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    // ── Constants ──────────────────────────────────────────────────────────
+    var STORAGE_KEY = "webtables_data";
+    var DEFAULT_DATA = [
+      { firstName:"Cierra",  lastName:"Vega",    age:"39", email:"cierra@example.com",  salary:"10000", department:"Insurance"  },
+      { firstName:"Alden",   lastName:"Cantrell", age:"45", email:"alden@example.com",   salary:"12000", department:"Compliance" },
+      { firstName:"Kierra",  lastName:"Gentry",  age:"29", email:"kierra@example.com",  salary:"2000",  department:"Legal"      }
+    ];
+
+    // ── State ──────────────────────────────────────────────────────────────
+    var data = loadData();
+    var currentPage = 1;
+    var pageSize = 10;
+    var searchText = "";
+    var editingIndex = -1; // -1 = add mode, >=0 = edit mode
+
+    function loadData() {
+      try {
+        var stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : DEFAULT_DATA.map(function(r){ return Object.assign({}, r); });
+      } catch(e) {
+        return DEFAULT_DATA.map(function(r){ return Object.assign({}, r); });
+      }
+    }
+
+    function saveData() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+    }
+
+    // ── Filtering / pagination helpers ─────────────────────────────────────
+    function getFiltered() {
+      if (!searchText) return data.slice();
+      var q = searchText.toLowerCase();
+      return data.filter(function(r) {
+        return ["firstName","lastName","age","email","salary","department"].some(function(k){
+          return String(r[k]).toLowerCase().indexOf(q) !== -1;
+        });
+      });
+    }
+
+    function getTotalPages(filtered) {
+      return Math.max(1, Math.ceil(filtered.length / pageSize));
+    }
+
+    // ── Render ─────────────────────────────────────────────────────────────
+    function render() {
+      var filtered = getFiltered();
+      var totalPages = getTotalPages(filtered);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      var start = (currentPage - 1) * pageSize;
+      var pageRows = filtered.slice(start, start + pageSize);
+
+      var tbody = document.getElementById("rt-tbody");
+      tbody.innerHTML = pageRows.map(function(row, i) {
+        // Find actual index in data array for edit/delete
+        var dataIdx = data.indexOf(row);
+        var pos = i + 1;
+        return [
+          '<div class="rt-tr-group">',
+          '  <div role="row" class="rt-tr">',
+          '    <div class="rt-td">' + esc(row.firstName)  + '</div>',
+          '    <div class="rt-td">' + esc(row.lastName)   + '</div>',
+          '    <div class="rt-td">' + esc(row.age)        + '</div>',
+          '    <div class="rt-td">' + esc(row.email)      + '</div>',
+          '    <div class="rt-td">' + esc(row.salary)     + '</div>',
+          '    <div class="rt-td">' + esc(row.department) + '</div>',
+          '    <div class="rt-td">',
+          '      <span id="edit-record-'   + pos + '" title="Edit"   class="action-icon" data-idx="' + dataIdx + '" onclick="openEditModal(' + dataIdx + ')">&#9998;</span>',
+          '      <span id="delete-record-' + pos + '" title="Delete" class="action-icon" data-idx="' + dataIdx + '" onclick="deleteRow('   + dataIdx + ')">&#10005;</span>',
+          '    </div>',
+          '  </div>',
+          '</div>'
+        ].join("\n");
+      }).join("\n");
+
+      // Pagination controls
+      document.getElementById("current-page-num").textContent = currentPage;
+      document.getElementById("total-pages-display").textContent = totalPages;
+      document.querySelector(".-previous").disabled = currentPage <= 1;
+      document.querySelector(".-next").disabled = currentPage >= totalPages;
+    }
+
+    function esc(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    // ── Search ─────────────────────────────────────────────────────────────
+    function onSearch() {
+      searchText = document.getElementById("searchBox").value;
+      currentPage = 1;
+      render();
+    }
+
+    // ── Rows per page ──────────────────────────────────────────────────────
+    function onRowsPerPageChange() {
+      pageSize = parseInt(document.getElementById("rows-per-page-sel").value);
+      currentPage = 1;
+      render();
+    }
+
+    // ── Pagination ─────────────────────────────────────────────────────────
+    function goToPrev() {
+      if (currentPage > 1) { currentPage--; render(); }
+    }
+    function goToNext() {
+      var totalPages = getTotalPages(getFiltered());
+      if (currentPage < totalPages) { currentPage++; render(); }
+    }
+
+    // ── CRUD ───────────────────────────────────────────────────────────────
+    function deleteRow(dataIdx) {
+      data.splice(dataIdx, 1);
+      saveData();
+      render();
+    }
+
+    function openAddModal() {
+      editingIndex = -1;
+      showModal("Registration Form", {});
+    }
+
+    function openEditModal(dataIdx) {
+      editingIndex = dataIdx;
+      showModal("Registration Form", data[dataIdx]);
+    }
+
+    function showModal(title, record) {
+      // Remove any existing modal
+      var existing = document.getElementById("wt-modal-overlay");
+      if (existing) existing.remove();
+
+      var overlay = document.createElement("div");
+      overlay.className = "modal-overlay";
+      overlay.id = "wt-modal-overlay";
+      overlay.innerHTML = [
+        '<div class="modal-content">',
+        '  <div class="modal-header">',
+        '    <h5 id="registration-form-modal">' + esc(title) + '</h5>',
+        '  </div>',
+        '  <div class="modal-body">',
+        '    <div class="modal-form-group"><label>First Name</label><input id="firstName"   type="text" value="' + esc(record.firstName  ||"") + '" /></div>',
+        '    <div class="modal-form-group"><label>Last Name</label> <input id="lastName"    type="text" value="' + esc(record.lastName   ||"") + '" /></div>',
+        '    <div class="modal-form-group"><label>Email</label>     <input id="userEmail"   type="text" value="' + esc(record.email      ||"") + '" /></div>',
+        '    <div class="modal-form-group"><label>Age</label>       <input id="age"         type="text" value="' + esc(record.age        ||"") + '" /></div>',
+        '    <div class="modal-form-group"><label>Salary</label>    <input id="salary"      type="text" value="' + esc(record.salary     ||"") + '" /></div>',
+        '    <div class="modal-form-group"><label>Department</label><input id="department"  type="text" value="' + esc(record.department ||"") + '" /></div>',
+        '  </div>',
+        '  <div class="modal-footer">',
+        '    <button class="btn-cancel" onclick="closeModal()">Close</button>',
+        '    <button id="submit" onclick="submitModal()">Submit</button>',
+        '  </div>',
+        '</div>'
+      ].join("\n");
+
+      document.body.appendChild(overlay);
+    }
+
+    function closeModal() {
+      var overlay = document.getElementById("wt-modal-overlay");
+      if (overlay) overlay.remove();
+    }
+
+    function submitModal() {
+      var record = {
+        firstName:  document.getElementById("firstName").value,
+        lastName:   document.getElementById("lastName").value,
+        email:      document.getElementById("userEmail").value,
+        age:        document.getElementById("age").value,
+        salary:     document.getElementById("salary").value,
+        department: document.getElementById("department").value
+      };
+
+      if (editingIndex >= 0) {
+        data[editingIndex] = record;
+      } else {
+        data.push(record);
+      }
+
+      saveData();
+      closeModal();
+      render();
+    }
+
+    // ── Init ───────────────────────────────────────────────────────────────
+    render();
+  </script>
+</body>
+</html>
