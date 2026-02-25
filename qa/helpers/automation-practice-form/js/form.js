@@ -226,6 +226,15 @@
         else this._clearError(lbl);
       }
 
+      // Validate date of birth — must be selected via the date picker
+      const dobInput = document.getElementById('dateOfBirthInput');
+      if (!FormState.selectedDOB.day) {
+        this._markError(dobInput);
+        valid = false;
+      } else {
+        this._clearError(dobInput);
+      }
+
       return valid;
     },
 

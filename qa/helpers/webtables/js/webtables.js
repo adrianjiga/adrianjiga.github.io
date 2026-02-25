@@ -6,9 +6,9 @@
   const STORAGE_KEY = 'webtables_data';
 
   const DEFAULT_RECORDS = [
-    { firstName: 'Cierra', lastName: 'Vega',    age: '39', email: 'cierra@example.com', salary: '10000', department: 'Insurance'  },
-    { firstName: 'Alden',  lastName: 'Cantrell', age: '45', email: 'alden@example.com',  salary: '12000', department: 'Compliance' },
-    { firstName: 'Kierra', lastName: 'Gentry',  age: '29', email: 'kierra@example.com', salary: '2000',  department: 'Legal'      },
+    { id: 'default-1', firstName: 'Cierra', lastName: 'Vega',    age: '39', email: 'cierra@example.com', salary: '10000', department: 'Insurance'  },
+    { id: 'default-2', firstName: 'Alden',  lastName: 'Cantrell', age: '45', email: 'alden@example.com',  salary: '12000', department: 'Compliance' },
+    { id: 'default-3', firstName: 'Kierra', lastName: 'Gentry',  age: '29', email: 'kierra@example.com', salary: '2000',  department: 'Legal'      },
   ];
 
   // ── DataStore ───────────────────────────────────────────────────────────────
@@ -26,13 +26,15 @@
       } catch {
         this.records = DEFAULT_RECORDS.map(r => ({ ...r }));
       }
+      // Migrate any records that were saved without an id
+      this.records.forEach(r => { if (!r.id) r.id = crypto.randomUUID(); });
     },
 
     save() {
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(this.records)); } catch {}
     },
 
-    add(record)           { this.records.push(record);        this.save(); },
+    add(record)           { this.records.push({ id: crypto.randomUUID(), ...record }); this.save(); },
     update(index, record) { this.records[index] = record;     this.save(); },
     remove(index)         { this.records.splice(index, 1);    this.save(); },
 
@@ -89,7 +91,7 @@
         .replace(/"/g, '&quot;');
     },
 
-    rowHtml(row, pos, dataIdx) {
+    rowHtml(row, pos) {
       const e = v => this.esc(v);
       return `
         <tr data-cy="table-row-${pos}">
@@ -100,8 +102,8 @@
           <td data-cy="cell-salary-${pos}">${e(row.salary)}</td>
           <td data-cy="cell-department-${pos}">${e(row.department)}</td>
           <td data-cy="cell-actions-${pos}">
-            <span id="edit-record-${pos}"   title="Edit"   class="action-icon" data-cy="edit-btn-${pos}"   data-idx="${dataIdx}">&#9998;</span>
-            <span id="delete-record-${pos}" title="Delete" class="action-icon" data-cy="delete-btn-${pos}" data-idx="${dataIdx}">&#10005;</span>
+            <span id="edit-record-${pos}"   title="Edit"   class="action-icon" data-cy="edit-btn-${pos}"   data-id="${e(row.id)}">&#9998;</span>
+            <span id="delete-record-${pos}" title="Delete" class="action-icon" data-cy="delete-btn-${pos}" data-id="${e(row.id)}">&#10005;</span>
           </td>
         </tr>`;
     },
@@ -129,19 +131,11 @@
     },
 
     renderTable(filtered) {
-      document.getElementById('table-body').innerHTML = Pagination
+      // All user data is escaped via esc() in rowHtml before assignment
+      document.getElementById('table-body').innerHTML = Pagination // safe: all values run through esc()
         .slice(filtered)
-        .map((row, i) => this.rowHtml(row, i + 1, DataStore.records.indexOf(row)))
+        .map((row, i) => this.rowHtml(row, i + 1))
         .join('');
-
-      // Re-bind action icons after every innerHTML replacement
-      document.querySelectorAll('.action-icon[data-idx]').forEach(el => {
-        el.addEventListener('click', () => {
-          const idx = parseInt(el.dataset.idx, 10);
-          if (el.title === 'Edit')   Modal.open(idx);
-          if (el.title === 'Delete') { DataStore.remove(idx); App.render(); }
-        });
-      });
     },
 
     renderPagination(totalPages) {
@@ -220,6 +214,17 @@
     },
 
     _bindEvents() {
+      // Event delegation for table actions — one listener instead of N listeners re-bound on every render
+      document.getElementById('table-body').addEventListener('click', e => {
+        const icon = e.target.closest('.action-icon[data-id]');
+        if (!icon) return;
+        const id  = icon.dataset.id;
+        const idx = DataStore.records.findIndex(r => r.id === id);
+        if (idx === -1) return;
+        if (icon.title === 'Edit')   Modal.open(idx);
+        if (icon.title === 'Delete') { DataStore.remove(idx); this.render(); }
+      });
+
       document.getElementById('searchBox').addEventListener('input', e => {
         this.searchText    = e.target.value;
         Pagination.currentPage = 1;
