@@ -6,7 +6,6 @@
 import { initCursorTrail } from "./cursor-trail.js";
 import { initParallax } from "./parallax.js";
 import { initScrollIndicator, initCardReveal } from "./scroll-effects.js";
-import { initSmoothScroll } from "./smooth-scroll.js";
 import { initThemeToggle } from "./theme-toggle.js";
 import { initFooterYear } from "./footer-year.js";
 import { initContactForm } from "./contact-form.js";
@@ -27,7 +26,6 @@ function init() {
     // Scroll-related features
     initScrollIndicator();
     initCardReveal();
-    initSmoothScroll();
 
     // Dynamic content
     initFooterYear();
