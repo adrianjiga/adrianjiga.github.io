@@ -64,19 +64,15 @@ export function initCardReveal() {
     cardObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const target = /** @type {HTMLElement} */ (entry.target);
-          target.style.opacity = "1";
-          target.style.transform = "translateY(0)";
+          entry.target.classList.remove("card--reveal-pending");
+          entry.target.classList.add("card--revealed");
         }
       });
     }, observerOptions);
 
     // Setup initial state and observe each card
     cards.forEach((card) => {
-      const cardElement = /** @type {HTMLElement} */ (card);
-      cardElement.style.opacity = "0";
-      cardElement.style.transform = "translateY(50px)";
-      cardElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      card.classList.add("card--reveal-pending");
       cardObserver?.observe(card);
     });
   } catch (error) {
