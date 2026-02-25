@@ -7,7 +7,6 @@ import { initCursorTrail } from "./cursor-trail.js";
 import { initParallax } from "./parallax.js";
 import { initScrollIndicator, initCardReveal } from "./scroll-effects.js";
 import { initThemeToggle } from "./theme-toggle.js";
-import { initFooterYear } from "./footer-year.js";
 import { initContactForm } from "./contact-form.js";
 
 /**
@@ -28,7 +27,8 @@ function init() {
     initCardReveal();
 
     // Dynamic content
-    initFooterYear();
+    const yearEl = document.querySelector("#current-year");
+    if (yearEl) { yearEl.textContent = String(new Date().getFullYear()); }
     initContactForm();
   } catch (error) {
     console.error("Failed to initialize application:", error);
