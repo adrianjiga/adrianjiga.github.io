@@ -8,6 +8,12 @@ const STORAGE_KEY = "theme-preference";
 /** @type {HTMLElement|null} */
 let toggleButton = null;
 
+/** @type {MediaQueryList|null} */
+let mediaQuery = null;
+
+/** @type {((e: MediaQueryListEvent) => void)|null} */
+let mediaQueryHandler = null;
+
 /**
  * Gets the user's preferred theme
  * Checks localStorage first, then system preference
@@ -73,13 +79,15 @@ export function initThemeToggle() {
 
     toggleButton.addEventListener("click", toggleTheme);
 
-    // Listen for system preference changes
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    // Listen for system preference changes — store refs so destroy() can remove the listener
+    mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQueryHandler = (e) => {
       // Only update if user hasn't set a preference
       if (!localStorage.getItem(STORAGE_KEY)) {
         setTheme(e.matches ? "dark" : "light");
       }
-    });
+    };
+    mediaQuery.addEventListener("change", mediaQueryHandler);
   } catch (error) {
     console.error("Failed to initialize theme toggle:", error);
   }
@@ -92,5 +100,11 @@ export function destroyThemeToggle() {
   if (toggleButton) {
     toggleButton.removeEventListener("click", toggleTheme);
     toggleButton = null;
+  }
+
+  if (mediaQuery && mediaQueryHandler) {
+    mediaQuery.removeEventListener("change", mediaQueryHandler);
+    mediaQuery = null;
+    mediaQueryHandler = null;
   }
 }

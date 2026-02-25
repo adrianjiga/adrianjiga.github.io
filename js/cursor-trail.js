@@ -7,6 +7,9 @@
 let trails = [];
 const MAX_TRAILS = 20;
 
+/** @type {number} */
+let rafId = 0;
+
 /**
  * Initializes the cursor trail effect
  * Creates trail elements and sets up event listeners
@@ -95,7 +98,7 @@ function animateTrails() {
     }
   });
 
-  requestAnimationFrame(animateTrails);
+  rafId = requestAnimationFrame(animateTrails);
 }
 
 /**
@@ -103,6 +106,9 @@ function animateTrails() {
  * Removes all trail elements and event listeners
  */
 export function destroyCursorTrail() {
+  cancelAnimationFrame(rafId);
+  rafId = 0;
+
   document.removeEventListener("mousemove", handleMouseMove);
   document.removeEventListener("mouseleave", handleMouseLeave);
 
