@@ -135,9 +135,3 @@ h1 {
   right: calc(80% + 20px);
   animation: pulse 0.8s ease-in-out infinite, travel2 10s ease-in-out infinite 3s;
 }
-
-/* Hide decorative shapes when scrolled into text-heavy sections */
-.shapes-hidden .shape {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
