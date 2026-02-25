@@ -55,7 +55,8 @@ function setTheme(theme) {
  * Toggles between light and dark themes
  */
 function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute("data-theme") || getPreferredTheme();
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") || getPreferredTheme();
   const newTheme = currentTheme === "dark" ? "light" : "dark";
   setTheme(newTheme);
 }

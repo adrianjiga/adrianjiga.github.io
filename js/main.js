@@ -28,7 +28,9 @@ function init() {
 
     // Dynamic content
     const yearEl = document.querySelector("#current-year");
-    if (yearEl) { yearEl.textContent = String(new Date().getFullYear()); }
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
     initContactForm();
   } catch (error) {
     console.error("Failed to initialize application:", error);
