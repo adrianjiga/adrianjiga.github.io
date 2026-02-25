@@ -21,18 +21,33 @@
 }
 
 @keyframes travel1 {
-  0%, 100% { top: 2%; }
-  50% { top: 88%; }
+  0%,
+  100% {
+    top: 2%;
+  }
+  50% {
+    top: 88%;
+  }
 }
 
 @keyframes travel2 {
-  0%, 100% { top: 88%; }
-  50% { top: 2%; }
+  0%,
+  100% {
+    top: 88%;
+  }
+  50% {
+    top: 2%;
+  }
 }
 
 @keyframes travel3 {
-  0%, 100% { top: 5%; }
-  50% { top: 90%; }
+  0%,
+  100% {
+    top: 5%;
+  }
+  50% {
+    top: 90%;
+  }
 }
 
 @keyframes pulse {

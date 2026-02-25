@@ -89,7 +89,8 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(var(--text-primary) 1px, transparent 1px),
+  background-image:
+    linear-gradient(var(--text-primary) 1px, transparent 1px),
     linear-gradient(90deg, var(--text-primary) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   opacity: 0.03;
@@ -109,7 +110,9 @@ h1 {
   height: 210px;
   border: 3px solid var(--acid);
   left: calc(80% + 20px);
-  animation: rotate 4s linear infinite, travel1 12s ease-in-out infinite;
+  animation:
+    rotate 4s linear infinite,
+    travel1 12s ease-in-out infinite;
 }
 
 .shape-2 {
@@ -117,7 +120,9 @@ h1 {
   height: 210px;
   border: 3px solid var(--blue);
   right: calc(80% + 20px);
-  animation: rotate 3s linear infinite reverse, travel2 15s ease-in-out infinite;
+  animation:
+    rotate 3s linear infinite reverse,
+    travel2 15s ease-in-out infinite;
 }
 
 .shape-3 {
@@ -125,7 +130,9 @@ h1 {
   height: 80px;
   background: var(--red);
   left: calc(80% + 20px);
-  animation: pulse 0.8s ease-in-out infinite, travel3 10s ease-in-out infinite 3s;
+  animation:
+    pulse 0.8s ease-in-out infinite,
+    travel3 10s ease-in-out infinite 3s;
 }
 
 .shape-4 {
@@ -133,5 +140,7 @@ h1 {
   height: 80px;
   background: var(--red);
   right: calc(80% + 20px);
-  animation: pulse 0.8s ease-in-out infinite, travel2 10s ease-in-out infinite 3s;
+  animation:
+    pulse 0.8s ease-in-out infinite,
+    travel2 10s ease-in-out infinite 3s;
 }
