@@ -9,9 +9,11 @@ import { initScrollIndicator, initCardReveal } from "./scroll-effects.js";
 import { initSmoothScroll } from "./smooth-scroll.js";
 import { initThemeToggle } from "./theme-toggle.js";
 import { initFooterYear } from "./footer-year.js";
+import { initContactForm } from "./contact-form.js";
 
 /**
- * Initializes all modules when the DOM is ready
+ * Initializes all modules. type="module" scripts are deferred automatically,
+ * so this runs after the DOM is parsed — no DOMContentLoaded guard needed.
  */
 function init() {
   try {
@@ -29,16 +31,10 @@ function init() {
 
     // Dynamic content
     initFooterYear();
-
-    console.log("All modules initialized successfully");
+    initContactForm();
   } catch (error) {
     console.error("Failed to initialize application:", error);
   }
 }
 
-// Initialize when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
+init();

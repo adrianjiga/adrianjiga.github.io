@@ -113,8 +113,7 @@ function handleSubmit(e) {
     return;
   }
 
-  // Form is valid - in a real implementation, you would send the data to a server
-  // For now, show a success message
+  // Show success feedback on the submit button, then reset
   const submitButton = form?.querySelector('button[type="submit"]');
   if (submitButton) {
     const originalText = submitButton.textContent;
@@ -127,8 +126,6 @@ function handleSubmit(e) {
       form?.reset();
     }, 3000);
   }
-
-  console.log("Form submitted successfully");
 }
 
 /**
