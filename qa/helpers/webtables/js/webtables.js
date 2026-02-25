@@ -1,14 +1,38 @@
 (function () {
-  'use strict';
+  "use strict";
 
   // ── Constants ───────────────────────────────────────────────────────────────
 
-  const STORAGE_KEY = 'webtables_data';
+  const STORAGE_KEY = "webtables_data";
 
   const DEFAULT_RECORDS = [
-    { id: 'default-1', firstName: 'Cierra', lastName: 'Vega',    age: '39', email: 'cierra@example.com', salary: '10000', department: 'Insurance'  },
-    { id: 'default-2', firstName: 'Alden',  lastName: 'Cantrell', age: '45', email: 'alden@example.com',  salary: '12000', department: 'Compliance' },
-    { id: 'default-3', firstName: 'Kierra', lastName: 'Gentry',  age: '29', email: 'kierra@example.com', salary: '2000',  department: 'Legal'      },
+    {
+      id: "default-1",
+      firstName: "Cierra",
+      lastName: "Vega",
+      age: "39",
+      email: "cierra@example.com",
+      salary: "10000",
+      department: "Insurance",
+    },
+    {
+      id: "default-2",
+      firstName: "Alden",
+      lastName: "Cantrell",
+      age: "45",
+      email: "alden@example.com",
+      salary: "12000",
+      department: "Compliance",
+    },
+    {
+      id: "default-3",
+      firstName: "Kierra",
+      lastName: "Gentry",
+      age: "29",
+      email: "kierra@example.com",
+      salary: "2000",
+      department: "Legal",
+    },
   ];
 
   // ── DataStore ───────────────────────────────────────────────────────────────
@@ -22,28 +46,54 @@
         const stored = localStorage.getItem(STORAGE_KEY);
         this.records = stored
           ? JSON.parse(stored)
-          : DEFAULT_RECORDS.map(r => ({ ...r }));
+          : DEFAULT_RECORDS.map((r) => ({ ...r }));
       } catch {
-        this.records = DEFAULT_RECORDS.map(r => ({ ...r }));
+        this.records = DEFAULT_RECORDS.map((r) => ({ ...r }));
       }
       // Migrate any records that were saved without an id
-      this.records.forEach(r => { if (!r.id) r.id = crypto.randomUUID(); });
+      this.records.forEach((r) => {
+        if (!r.id) {
+          r.id = crypto.randomUUID();
+        }
+      });
     },
 
     save() {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(this.records)); } catch {}
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.records));
+      } catch {
+        /* empty */
+      }
     },
 
-    add(record)           { this.records.push({ id: crypto.randomUUID(), ...record }); this.save(); },
-    update(index, record) { this.records[index] = record;     this.save(); },
-    remove(index)         { this.records.splice(index, 1);    this.save(); },
+    add(record) {
+      this.records.push({ id: crypto.randomUUID(), ...record });
+      this.save();
+    },
+    update(index, record) {
+      this.records[index] = record;
+      this.save();
+    },
+    remove(index) {
+      this.records.splice(index, 1);
+      this.save();
+    },
 
     filter(text) {
-      if (!text) return this.records.slice();
-      const q      = text.toLowerCase();
-      const FIELDS = ['firstName', 'lastName', 'age', 'email', 'salary', 'department'];
-      return this.records.filter(r =>
-        FIELDS.some(k => String(r[k]).toLowerCase().includes(q))
+      if (!text) {
+        return this.records.slice();
+      }
+      const q = text.toLowerCase();
+      const FIELDS = [
+        "firstName",
+        "lastName",
+        "age",
+        "email",
+        "salary",
+        "department",
+      ];
+      return this.records.filter((r) =>
+        FIELDS.some((k) => String(r[k]).toLowerCase().includes(q)),
       );
     },
   };
@@ -60,7 +110,7 @@
     currentPage: 1,
 
     getPageSize() {
-      const el = document.getElementById('rows-per-page-sel');
+      const el = document.getElementById("rows-per-page-sel");
       return el ? parseInt(el.value, 10) : 10;
     },
 
@@ -73,7 +123,7 @@
     },
 
     slice(items) {
-      const size  = this.getPageSize();
+      const size = this.getPageSize();
       const start = (this.currentPage - 1) * size;
       return items.slice(start, start + size);
     },
@@ -84,15 +134,15 @@
 
   const Renderer = {
     esc(s) {
-      return String(s == null ? '' : s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+      return String(s === null ? "" : s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     },
 
     rowHtml(row, pos) {
-      const e = v => this.esc(v);
+      const e = (v) => this.esc(v);
       return `
         <tr data-cy="table-row-${pos}">
           <td data-cy="cell-first-name-${pos}">${e(row.firstName)}</td>
@@ -109,19 +159,19 @@
     },
 
     modalHtml(title, record) {
-      const e = v => this.esc(v);
+      const e = (v) => this.esc(v);
       return `
         <div data-cy="registration-modal">
           <div class="modal-header">
             <h5 id="registration-form-modal" data-cy="modal-title">${e(title)}</h5>
           </div>
           <div class="modal-body">
-            <div class="field-group"><label>First Name</label> <input id="firstName"  data-cy="modal-first-name"  type="text" value="${e(record.firstName  || '')}" /></div>
-            <div class="field-group"><label>Last Name</label>  <input id="lastName"   data-cy="modal-last-name"   type="text" value="${e(record.lastName   || '')}" /></div>
-            <div class="field-group"><label>Email</label>      <input id="userEmail"  data-cy="modal-email"       type="text" value="${e(record.email      || '')}" /></div>
-            <div class="field-group"><label>Age</label>        <input id="age"        data-cy="modal-age"         type="text" value="${e(record.age        || '')}" /></div>
-            <div class="field-group"><label>Salary</label>     <input id="salary"     data-cy="modal-salary"      type="text" value="${e(record.salary     || '')}" /></div>
-            <div class="field-group"><label>Department</label> <input id="department" data-cy="modal-department"  type="text" value="${e(record.department || '')}" /></div>
+            <div class="field-group"><label>First Name</label> <input id="firstName"  data-cy="modal-first-name"  type="text" value="${e(record.firstName || "")}" /></div>
+            <div class="field-group"><label>Last Name</label>  <input id="lastName"   data-cy="modal-last-name"   type="text" value="${e(record.lastName || "")}" /></div>
+            <div class="field-group"><label>Email</label>      <input id="userEmail"  data-cy="modal-email"       type="text" value="${e(record.email || "")}" /></div>
+            <div class="field-group"><label>Age</label>        <input id="age"        data-cy="modal-age"         type="text" value="${e(record.age || "")}" /></div>
+            <div class="field-group"><label>Salary</label>     <input id="salary"     data-cy="modal-salary"      type="text" value="${e(record.salary || "")}" /></div>
+            <div class="field-group"><label>Department</label> <input id="department" data-cy="modal-department"  type="text" value="${e(record.department || "")}" /></div>
           </div>
           <div class="modal-footer">
             <button class="btn-cancel" data-cy="modal-cancel-btn">Close</button>
@@ -132,17 +182,22 @@
 
     renderTable(filtered) {
       // All user data is escaped via esc() in rowHtml before assignment
-      document.getElementById('table-body').innerHTML = Pagination // safe: all values run through esc()
-        .slice(filtered)
+      document.getElementById("table-body").innerHTML = Pagination.slice(
+        // safe: all values run through esc()
+        filtered,
+      )
         .map((row, i) => this.rowHtml(row, i + 1))
-        .join('');
+        .join("");
     },
 
     renderPagination(totalPages) {
-      document.getElementById('current-page-num').textContent    = Pagination.currentPage;
-      document.getElementById('total-pages-display').textContent = totalPages;
-      document.querySelector("[data-cy='prev-page-btn']").disabled = Pagination.currentPage <= 1;
-      document.querySelector("[data-cy='next-page-btn']").disabled = Pagination.currentPage >= totalPages;
+      document.getElementById("current-page-num").textContent =
+        Pagination.currentPage;
+      document.getElementById("total-pages-display").textContent = totalPages;
+      document.querySelector("[data-cy='prev-page-btn']").disabled =
+        Pagination.currentPage <= 1;
+      document.querySelector("[data-cy='next-page-btn']").disabled =
+        Pagination.currentPage >= totalPages;
     },
   };
 
@@ -155,39 +210,46 @@
     open(dataIdx) {
       this.editingIndex = dataIdx;
       const record = dataIdx >= 0 ? DataStore.records[dataIdx] : {};
-      this._show('Registration Form', record);
+      this._show("Registration Form", record);
     },
 
     _show(title, record) {
-      document.getElementById('wt-modal-overlay')?.remove();
+      document.getElementById("wt-modal-overlay")?.remove();
 
-      const overlay = document.createElement('div');
-      overlay.className = 'modal-overlay';
-      overlay.id        = 'wt-modal-overlay';
-      overlay.setAttribute('data-cy', 'modal-overlay');
+      const overlay = document.createElement("div");
+      overlay.className = "modal-overlay";
+      overlay.id = "wt-modal-overlay";
+      overlay.setAttribute("data-cy", "modal-overlay");
       overlay.innerHTML = Renderer.modalHtml(title, record);
 
-      overlay.querySelector("[data-cy='modal-submit-btn']").addEventListener('click', () => this._submit());
-      overlay.querySelector("[data-cy='modal-cancel-btn']").addEventListener('click', () => this.close());
+      overlay
+        .querySelector("[data-cy='modal-submit-btn']")
+        .addEventListener("click", () => this._submit());
+      overlay
+        .querySelector("[data-cy='modal-cancel-btn']")
+        .addEventListener("click", () => this.close());
 
       document.body.appendChild(overlay);
     },
 
     close() {
-      document.getElementById('wt-modal-overlay')?.remove();
+      document.getElementById("wt-modal-overlay")?.remove();
     },
 
     _submit() {
       const record = {
-        firstName:  document.getElementById('firstName').value,
-        lastName:   document.getElementById('lastName').value,
-        email:      document.getElementById('userEmail').value,
-        age:        document.getElementById('age').value,
-        salary:     document.getElementById('salary').value,
-        department: document.getElementById('department').value,
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("userEmail").value,
+        age: document.getElementById("age").value,
+        salary: document.getElementById("salary").value,
+        department: document.getElementById("department").value,
       };
-      if (this.editingIndex >= 0) DataStore.update(this.editingIndex, record);
-      else                        DataStore.add(record);
+      if (this.editingIndex >= 0) {
+        DataStore.update(this.editingIndex, record);
+      } else {
+        DataStore.add(record);
+      }
       this.close();
       App.render();
     },
@@ -197,7 +259,7 @@
   // Single responsibility: bootstrap, event wiring, and top-level render cycle.
 
   const App = {
-    searchText: '',
+    searchText: "",
 
     init() {
       DataStore.load();
@@ -206,7 +268,7 @@
     },
 
     render() {
-      const filtered   = DataStore.filter(this.searchText);
+      const filtered = DataStore.filter(this.searchText);
       const totalPages = Pagination.getTotalPages(filtered.length);
       Pagination.clampToTotal(totalPages);
       Renderer.renderTable(filtered);
@@ -215,18 +277,27 @@
 
     _bindEvents() {
       // Event delegation for table actions — one listener instead of N listeners re-bound on every render
-      document.getElementById('table-body').addEventListener('click', e => {
-        const icon = e.target.closest('.action-icon[data-id]');
-        if (!icon) return;
-        const id  = icon.dataset.id;
-        const idx = DataStore.records.findIndex(r => r.id === id);
-        if (idx === -1) return;
-        if (icon.title === 'Edit')   Modal.open(idx);
-        if (icon.title === 'Delete') { DataStore.remove(idx); this.render(); }
+      document.getElementById("table-body").addEventListener("click", (e) => {
+        const icon = e.target.closest(".action-icon[data-id]");
+        if (!icon) {
+          return;
+        }
+        const id = icon.dataset.id;
+        const idx = DataStore.records.findIndex((r) => r.id === id);
+        if (idx === -1) {
+          return;
+        }
+        if (icon.title === "Edit") {
+          Modal.open(idx);
+        }
+        if (icon.title === "Delete") {
+          DataStore.remove(idx);
+          this.render();
+        }
       });
 
-      document.getElementById('searchBox').addEventListener('input', e => {
-        this.searchText    = e.target.value;
+      document.getElementById("searchBox").addEventListener("input", (e) => {
+        this.searchText = e.target.value;
         Pagination.currentPage = 1;
         this.render();
       });
@@ -234,21 +305,37 @@
       // The change event resets the page and re-renders.
       // render() calls Pagination.getPageSize() which reads the select value
       // directly from the DOM, so the correct page size is always used.
-      document.getElementById('rows-per-page-sel').addEventListener('change', () => {
-        Pagination.currentPage = 1;
-        this.render();
-      });
+      document
+        .getElementById("rows-per-page-sel")
+        .addEventListener("change", () => {
+          Pagination.currentPage = 1;
+          this.render();
+        });
 
-      document.getElementById('addNewRecordButton').addEventListener('click', () => Modal.open(-1));
+      document
+        .getElementById("addNewRecordButton")
+        .addEventListener("click", () => Modal.open(-1));
 
-      document.querySelector("[data-cy='prev-page-btn']").addEventListener('click', () => {
-        if (Pagination.currentPage > 1) { Pagination.currentPage--; this.render(); }
-      });
+      document
+        .querySelector("[data-cy='prev-page-btn']")
+        .addEventListener("click", () => {
+          if (Pagination.currentPage > 1) {
+            Pagination.currentPage--;
+            this.render();
+          }
+        });
 
-      document.querySelector("[data-cy='next-page-btn']").addEventListener('click', () => {
-        const total = Pagination.getTotalPages(DataStore.filter(this.searchText).length);
-        if (Pagination.currentPage < total) { Pagination.currentPage++; this.render(); }
-      });
+      document
+        .querySelector("[data-cy='next-page-btn']")
+        .addEventListener("click", () => {
+          const total = Pagination.getTotalPages(
+            DataStore.filter(this.searchText).length,
+          );
+          if (Pagination.currentPage < total) {
+            Pagination.currentPage++;
+            this.render();
+          }
+        });
     },
   };
 
