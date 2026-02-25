@@ -26,9 +26,9 @@
   --bg-primary: var(--black);
   --bg-secondary: #141414;
   --text-primary: var(--white);
-  --text-secondary: rgba(250, 250, 250, 0.8);
+  --text-secondary: rgb(250, 250, 250, 0.8);
   --border-color: var(--white);
-  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgb(255, 255, 255, 0.1);
   --acid: var(--acid-dark);
   --red: var(--red-dark);
   --blue: var(--blue-dark);
@@ -41,9 +41,9 @@
     --bg-primary: var(--white);
     --bg-secondary: #e8e8e8;
     --text-primary: var(--black);
-    --text-secondary: rgba(10, 10, 10, 0.75);
+    --text-secondary: rgb(10, 10, 10, 0.75);
     --border-color: #2a2a2a;
-    --border-subtle: rgba(0, 0, 0, 0.15);
+    --border-subtle: rgb(0, 0, 0, 0.15);
     --acid: var(--acid-light);
     --red: var(--red-light);
     --blue: var(--blue-light);
@@ -56,9 +56,9 @@
   --bg-primary: var(--black);
   --bg-secondary: #141414;
   --text-primary: var(--white);
-  --text-secondary: rgba(250, 250, 250, 0.8);
+  --text-secondary: rgb(250, 250, 250, 0.8);
   --border-color: var(--white);
-  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgb(255, 255, 255, 0.1);
   --acid: var(--acid-dark);
   --red: var(--red-dark);
   --blue: var(--blue-dark);
@@ -69,9 +69,9 @@
   --bg-primary: var(--white);
   --bg-secondary: #e8e8e8;
   --text-primary: var(--black);
-  --text-secondary: rgba(10, 10, 10, 0.75);
+  --text-secondary: rgb(10, 10, 10, 0.75);
   --border-color: #2a2a2a;
-  --border-subtle: rgba(0, 0, 0, 0.15);
+  --border-subtle: rgb(0, 0, 0, 0.15);
   --acid: var(--acid-light);
   --red: var(--red-light);
   --blue: var(--blue-light);
