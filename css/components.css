@@ -1,0 +1,245 @@
+/* Buttons */
+.btn {
+  padding: 1.2rem 3rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--acid);
+  color: var(--acid-text);
+  border-color: var(--acid);
+}
+
+.btn-primary:hover {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border: 2px solid var(--border-color);
+  position: relative;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--acid);
+  opacity: 0.15;
+  transition: width 0.3s;
+  z-index: 0;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card:hover::after {
+  width: 100%;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.card-icon {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  color: var(--blue);
+  margin-bottom: 1rem;
+}
+
+.cards-grid .card:nth-child(1) .card-icon { color: var(--acid); }
+.cards-grid .card:nth-child(2) .card-icon { color: var(--blue); }
+.cards-grid .card:nth-child(3) .card-icon { color: var(--red); }
+
+.card-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.card-description {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 6rem;
+  border: 2px solid var(--border-color);
+  animation: fadeIn 1s ease-out 1.2s both;
+}
+
+.stat {
+  padding: 2rem;
+  border-right: 2px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--acid), transparent);
+  opacity: 0.1;
+  transition: left 0.5s;
+}
+
+.stat:hover::before {
+  left: 100%;
+}
+
+.stat-number {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: var(--acid);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--acid);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+  border-color: var(--red);
+}
+
+.form-group .error-message {
+  color: var(--red);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.form-group input:invalid:not(:placeholder-shown) + .error-message,
+.form-group textarea:invalid:not(:placeholder-shown) + .error-message {
+  display: block;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.form-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+#contact {
+  text-align: center;
+}
+
+.contact-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
