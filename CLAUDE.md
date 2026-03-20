@@ -30,7 +30,7 @@ npm install
 ```
 /                        — Portfolio homepage (index.html)
   css/                   — Split CSS modules (base, layout, components, animations, etc.)
-  js/                    — ES module scripts (cursor-trail, parallax, scroll-effects, etc.)
+  js/                    — ES module scripts (cursor-trail, parallax, scroll-effects, theme-toggle)
   dist/                  — Vite build output (not committed; used for preview/optimization)
 /qa/                     — QA resources section
   index.html             — QA landing page
