@@ -7,7 +7,6 @@ import { initCursorTrail } from "./cursor-trail.js";
 import { initParallax } from "./parallax.js";
 import { initScrollIndicator, initCardReveal } from "./scroll-effects.js";
 import { initThemeToggle } from "./theme-toggle.js";
-import { initContactForm } from "./contact-form.js";
 
 /**
  * Initializes all modules. type="module" scripts are deferred automatically,
@@ -31,7 +30,6 @@ function init() {
     if (yearEl) {
       yearEl.textContent = String(new Date().getFullYear());
     }
-    initContactForm();
   } catch (error) {
     console.error("Failed to initialize application:", error);
   }
