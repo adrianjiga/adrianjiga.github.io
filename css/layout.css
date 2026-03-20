@@ -199,21 +199,3 @@ footer {
   margin-bottom: 1.5rem;
 }
 
-.interests-list {
-  list-style: none;
-}
-
-.interests-list li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-subtle);
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.interests-list li::before {
-  content: ">";
-  color: var(--acid);
-  font-size: 1.5rem;
-}

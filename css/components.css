@@ -80,34 +80,17 @@
   z-index: 1;
 }
 
-.card-icon {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 2.5rem;
-  color: var(--blue);
-  margin-bottom: 1rem;
-}
-
-.cards-grid .card:nth-child(1) .card-icon {
-  color: var(--acid);
-}
-
-.cards-grid .card:nth-child(2) .card-icon {
-  color: var(--blue);
-}
-
-.cards-grid .card:nth-child(3) .card-icon {
-  color: var(--red);
-}
-
-.cards-grid .card:nth-child(4) .card-icon {
-  color: var(--acid);
-}
 
 .card-title {
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
+}
+
+.card-title::before {
+  content: "// ";
+  color: var(--acid);
 }
 
 .card-description {
