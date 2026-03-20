@@ -1,0 +1,146 @@
+/* Hero Section */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 1200px;
+  position: relative;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--acid);
+  margin-bottom: 2rem;
+  animation: fadeIn 1s ease-out 0.3s both;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  line-height: 1;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+}
+
+.name {
+  display: block;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  color: var(--text-primary);
+}
+
+.tagline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  display: inline-block;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.tag:nth-child(1) {
+  animation-delay: 0.2s;
+  color: var(--acid);
+}
+
+.tag:nth-child(2) {
+  animation-delay: 0.3s;
+  color: var(--blue);
+}
+
+.tag:nth-child(3) {
+  animation-delay: 0.4s;
+  color: var(--red);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 1.8;
+  max-width: 750px;
+  margin-bottom: 3rem;
+  opacity: 0.8;
+  animation: fadeIn 1s ease-out 0.6s both;
+}
+
+.cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  animation: fadeIn 1s ease-out 0.9s both;
+}
+
+/* Animated Grid Background */
+.grid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(var(--text-primary) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text-primary) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  opacity: 0.03;
+  z-index: 0;
+  animation: gridSlide 20s linear infinite;
+}
+
+/* Floating Geometric Shapes — z-index: 0 keeps them behind all content */
+.shape {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shape-1 {
+  width: 210px;
+  height: 210px;
+  border: 3px solid var(--acid);
+  left: calc(80% + 20px);
+  animation:
+    rotate 4s linear infinite,
+    travel1 12s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 210px;
+  height: 210px;
+  border: 3px solid var(--blue);
+  right: calc(80% + 20px);
+  animation:
+    rotate 3s linear infinite reverse,
+    travel2 15s ease-in-out infinite;
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  background: var(--red);
+  left: calc(80% + 20px);
+  animation:
+    pulse 0.8s ease-in-out infinite,
+    travel3 10s ease-in-out infinite 3s;
+}
+
+.shape-4 {
+  width: 80px;
+  height: 80px;
+  background: var(--red);
+  right: calc(80% + 20px);
+  animation:
+    pulse 0.8s ease-in-out infinite,
+    travel2 10s ease-in-out infinite 3s;
+}
