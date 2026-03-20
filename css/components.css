@@ -90,12 +90,15 @@
 .cards-grid .card:nth-child(1) .card-icon {
   color: var(--acid);
 }
+
 .cards-grid .card:nth-child(2) .card-icon {
   color: var(--blue);
 }
+
 .cards-grid .card:nth-child(3) .card-icon {
   color: var(--red);
 }
+
 .cards-grid .card:nth-child(4) .card-icon {
   color: var(--acid);
 }
