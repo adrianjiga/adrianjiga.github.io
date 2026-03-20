@@ -155,8 +155,7 @@ section {
 
 /* Footer */
 footer {
-  padding: 3rem 4rem;
-  border-top: 2px solid var(--border-color);
+  padding: 2rem 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
