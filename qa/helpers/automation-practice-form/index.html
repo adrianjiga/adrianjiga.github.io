@@ -56,7 +56,7 @@
         />
         <div id="datepicker-popup" data-cy="datepicker-popup" style="display:none;">
           <div class="date-picker-header">
-            <select id="dp-month" data-cy="month-select">
+            <select id="dp-month" data-cy="month-select" aria-label="Month">
               <option value="0">January</option>
               <option value="1">February</option>
               <option value="2">March</option>
@@ -70,7 +70,7 @@
               <option value="10">November</option>
               <option value="11">December</option>
             </select>
-            <select id="dp-year" data-cy="year-select">
+            <select id="dp-year" data-cy="year-select" aria-label="Year">
               <!-- populated by DatePicker.init() -->
             </select>
           </div>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="form-group">
-      <label class="field-label">Subjects</label>
+      <label class="field-label" for="subjectsInput">Subjects</label>
       <div class="subjects-wrapper" id="subjects-wrapper" data-cy="subjects-wrapper">
         <div id="subjects-chips" data-cy="subjects-chips"></div>
         <input
@@ -165,7 +165,7 @@
     <div class="modal-dialog">
       <div class="modal-content" data-cy="modal-content">
         <div class="modal-header">
-          <h5 data-cy="modal-title">Thanks for submitting the form</h5>
+          <h2 data-cy="modal-title">Thanks for submitting the form</h2>
         </div>
         <div class="modal-body">
           <table data-cy="result-table">
