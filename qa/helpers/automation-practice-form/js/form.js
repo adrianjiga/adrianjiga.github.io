@@ -238,10 +238,9 @@
 
       const cityMenu = document.getElementById("city-menu");
       cityMenu.innerHTML = "";
-      (COUNTRY_CITIES[name] || []).forEach((city, i) => {
+      (COUNTRY_CITIES[name] || []).forEach((city) => {
         const opt = document.createElement("div");
         opt.className = "select-option";
-        opt.id = `city-option-${i}`;
         opt.setAttribute(
           "data-cy",
           `city-option-${city.toLowerCase().replace(/\s+/g, "-")}`,
