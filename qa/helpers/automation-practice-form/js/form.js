@@ -68,10 +68,10 @@
         .addEventListener("change", () => this._renderDays());
 
       document
-        .getElementById("date-of-birth-input")
+        .getElementById("dateOfBirthInput")
         .addEventListener("click", (e) => {
           e.stopPropagation();
-          const popup = document.getElementById("datepicker-popup");
+          const popup = document.getElementById("datepickerPopup");
           if (popup.style.display === "none") {
             this._renderDays();
             popup.style.display = "block";
@@ -82,12 +82,12 @@
 
       // Stop clicks inside the popup from bubbling to the document close handler.
       document
-        .getElementById("datepicker-popup")
+        .getElementById("datepickerPopup")
         .addEventListener("click", (e) => e.stopPropagation());
     },
 
     close() {
-      document.getElementById("datepicker-popup").style.display = "none";
+      document.getElementById("datepickerPopup").style.display = "none";
     },
 
     _initYears() {
@@ -141,7 +141,7 @@
         monthName: MONTH_NAMES[month],
         year,
       };
-      document.getElementById("date-of-birth-input").value =
+      document.getElementById("dateOfBirthInput").value =
         `${padded} ${MONTH_NAMES[month]} ${year}`;
       this.close();
     },
@@ -153,7 +153,7 @@
   const SubjectsInput = {
     init() {
       document
-        .getElementById("subjects-input")
+        .getElementById("subjectsInput")
         .addEventListener("keydown", (e) => {
           if (e.key !== "Enter") {
             return;
@@ -289,7 +289,7 @@
       }
 
       // Validate date of birth — must be selected via the date picker
-      const dobInput = document.getElementById("date-of-birth-input");
+      const dobInput = document.getElementById("dateOfBirthInput");
       if (!FormState.selectedDOB.day) {
         this._markError(dobInput);
         valid = false;

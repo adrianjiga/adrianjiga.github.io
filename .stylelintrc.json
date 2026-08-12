@@ -1,5 +1,7 @@
 {
-  "extends": ["stylelint-config-standard"],
+  "extends": [
+    "stylelint-config-standard"
+  ],
   "rules": {
     "color-hex-length": "long",
     "declaration-block-no-redundant-longhand-properties": null,
@@ -10,6 +12,7 @@
     "alpha-value-notation": "number",
     "color-function-notation": "legacy",
     "property-no-vendor-prefix": null,
-    "media-feature-range-notation": null
+    "media-feature-range-notation": null,
+    "selector-id-pattern": "^[a-z][a-zA-Z0-9]*$"
   }
 }

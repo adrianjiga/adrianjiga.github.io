@@ -26,7 +26,7 @@ h1 {
   margin-bottom: 12px;
 }
 
-#search-box {
+#searchBox {
   padding: 7px 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
@@ -35,11 +35,11 @@ h1 {
   outline: none;
 }
 
-#search-box:focus {
+#searchBox:focus {
   border-color: #80bdff;
 }
 
-#add-record-btn {
+#addNewRecordButton {
   padding: 7px 16px;
   background: #0366d6;
   color: #ffffff;
@@ -49,7 +49,7 @@ h1 {
   cursor: pointer;
 }
 
-#add-record-btn:hover {
+#addNewRecordButton:hover {
   background: #025bb5;
 }
 

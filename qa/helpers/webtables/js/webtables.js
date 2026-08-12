@@ -296,7 +296,7 @@
         }
       });
 
-      document.getElementById("search-box").addEventListener("input", (e) => {
+      document.getElementById("searchBox").addEventListener("input", (e) => {
         this.searchText = e.target.value;
         Pagination.currentPage = 1;
         this.render();
@@ -313,7 +313,7 @@
         });
 
       document
-        .getElementById("add-record-btn")
+        .getElementById("addNewRecordButton")
         .addEventListener("click", () => Modal.open(-1));
 
       document
