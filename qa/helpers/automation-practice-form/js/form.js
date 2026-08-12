@@ -68,7 +68,7 @@
         .addEventListener("change", () => this._renderDays());
 
       document
-        .getElementById("dateOfBirthInput")
+        .getElementById("date-of-birth-input")
         .addEventListener("click", (e) => {
           e.stopPropagation();
           const popup = document.getElementById("datepicker-popup");
@@ -141,7 +141,7 @@
         monthName: MONTH_NAMES[month],
         year,
       };
-      document.getElementById("dateOfBirthInput").value =
+      document.getElementById("date-of-birth-input").value =
         `${padded} ${MONTH_NAMES[month]} ${year}`;
       this.close();
     },
@@ -153,7 +153,7 @@
   const SubjectsInput = {
     init() {
       document
-        .getElementById("subjectsInput")
+        .getElementById("subjects-input")
         .addEventListener("keydown", (e) => {
           if (e.key !== "Enter") {
             return;
@@ -289,7 +289,7 @@
       }
 
       // Validate date of birth — must be selected via the date picker
-      const dobInput = document.getElementById("dateOfBirthInput");
+      const dobInput = document.getElementById("date-of-birth-input");
       if (!FormState.selectedDOB.day) {
         this._markError(dobInput);
         valid = false;
