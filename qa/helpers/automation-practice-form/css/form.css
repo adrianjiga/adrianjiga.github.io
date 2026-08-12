@@ -81,7 +81,7 @@ textarea:focus {
   width: 100%;
 }
 
-#dateOfBirthInput {
+#date-of-birth-input {
   cursor: pointer;
   background: #fff;
 }
@@ -173,7 +173,7 @@ textarea:focus {
   font-weight: bold;
 }
 
-#subjectsInput {
+#subjects-input {
   border: none;
   outline: none;
   flex: 1;
