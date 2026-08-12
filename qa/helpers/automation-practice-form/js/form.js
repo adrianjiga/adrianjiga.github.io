@@ -126,7 +126,7 @@
         cell.dataset.day = padded;
         cell.dataset.month = month;
         cell.dataset.year = year;
-        cell.setAttribute("data-cy", `day-${padded}`);
+        cell.setAttribute("data-cy", `day${padded}`);
         cell.addEventListener("click", () => this._pickDay(cell));
         grid.appendChild(cell);
       }
@@ -174,8 +174,8 @@
       FormState.subjects.forEach((s, i) => {
         const chip = document.createElement("span");
         chip.className = "subject-chip";
-        chip.setAttribute("data-cy", `subject-chip-${i}`);
-        chip.innerHTML = `${esc(s)} <span class="remove" data-cy="remove-subject-${i}" data-index="${i}">&#215;</span>`;
+        chip.setAttribute("data-cy", `subjectChip${i}`);
+        chip.innerHTML = `${esc(s)} <span class="remove" data-cy="removeSubject${i}" data-index="${i}">&#215;</span>`;
         chip.querySelector(".remove").addEventListener("click", (ev) => {
           FormState.subjects.splice(parseInt(ev.target.dataset.index, 10), 1);
           this._render();
@@ -241,10 +241,9 @@
       (COUNTRY_CITIES[name] || []).forEach((city) => {
         const opt = document.createElement("div");
         opt.className = "select-option";
-        opt.setAttribute(
-          "data-cy",
-          `city-option-${city.toLowerCase().replace(/\s+/g, "-")}`,
-        );
+        // "The Hague" -> cityOptionTheHague. Cities arrive capitalised already, so the only
+        // work is removing the spaces; lower-casing would flatten the camel humps.
+        opt.setAttribute("data-cy", `cityOption${city.replace(/\s+/g, "")}`);
         opt.textContent = city;
         opt.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -321,7 +320,7 @@
       document.getElementById("result-tbody").innerHTML = rows
         .map(
           (r, i) =>
-            `<tr data-cy="result-row-${i}"><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`,
+            `<tr data-cy="resultRow${i}"><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`,
         )
         .join("");
       document.getElementById("success-modal").style.display = "flex";
@@ -352,7 +351,7 @@
         .addEventListener("click", () => this._submit());
 
       document
-        .querySelector('[data-cy="close-modal-btn"]')
+        .querySelector('[data-cy="closeModalBtn"]')
         .addEventListener("click", () => SuccessModal.close());
 
       // Global click closes all open overlays (datepicker, dropdowns).

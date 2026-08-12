@@ -144,16 +144,16 @@
     rowHtml(row, pos) {
       const e = (v) => this.esc(v);
       return `
-        <tr data-cy="table-row-${pos}">
-          <td data-cy="cell-first-name-${pos}">${e(row.firstName)}</td>
-          <td data-cy="cell-last-name-${pos}">${e(row.lastName)}</td>
-          <td data-cy="cell-age-${pos}">${e(row.age)}</td>
-          <td data-cy="cell-email-${pos}">${e(row.email)}</td>
-          <td data-cy="cell-salary-${pos}">${e(row.salary)}</td>
-          <td data-cy="cell-department-${pos}">${e(row.department)}</td>
-          <td data-cy="cell-actions-${pos}">
-            <span id="edit-record-${pos}"   title="Edit"   class="action-icon" data-cy="edit-btn-${pos}"   data-id="${e(row.id)}">&#9998;</span>
-            <span id="delete-record-${pos}" title="Delete" class="action-icon" data-cy="delete-btn-${pos}" data-id="${e(row.id)}">&#10005;</span>
+        <tr data-cy="tableRow${pos}">
+          <td data-cy="cellFirstName${pos}">${e(row.firstName)}</td>
+          <td data-cy="cellLastName${pos}">${e(row.lastName)}</td>
+          <td data-cy="cellAge${pos}">${e(row.age)}</td>
+          <td data-cy="cellEmail${pos}">${e(row.email)}</td>
+          <td data-cy="cellSalary${pos}">${e(row.salary)}</td>
+          <td data-cy="cellDepartment${pos}">${e(row.department)}</td>
+          <td data-cy="cellActions${pos}">
+            <span id="edit-record-${pos}"   title="Edit"   class="action-icon" data-cy="editBtn${pos}"   data-id="${e(row.id)}">&#9998;</span>
+            <span id="delete-record-${pos}" title="Delete" class="action-icon" data-cy="deleteBtn${pos}" data-id="${e(row.id)}">&#10005;</span>
           </td>
         </tr>`;
     },
@@ -161,21 +161,21 @@
     modalHtml(title, record) {
       const e = (v) => this.esc(v);
       return `
-        <div data-cy="registration-modal">
+        <div data-cy="registrationModal">
           <div class="modal-header">
-            <h5 id="registration-form-modal" data-cy="modal-title">${e(title)}</h5>
+            <h5 id="registration-form-modal" data-cy="modalTitle">${e(title)}</h5>
           </div>
           <div class="modal-body">
-            <div class="field-group"><label>First Name</label> <input id="firstName"  data-cy="modal-first-name"  type="text" value="${e(record.firstName || "")}" /></div>
-            <div class="field-group"><label>Last Name</label>  <input id="lastName"   data-cy="modal-last-name"   type="text" value="${e(record.lastName || "")}" /></div>
-            <div class="field-group"><label>Email</label>      <input id="userEmail"  data-cy="modal-email"       type="text" value="${e(record.email || "")}" /></div>
-            <div class="field-group"><label>Age</label>        <input id="age"        data-cy="modal-age"         type="text" value="${e(record.age || "")}" /></div>
-            <div class="field-group"><label>Salary</label>     <input id="salary"     data-cy="modal-salary"      type="text" value="${e(record.salary || "")}" /></div>
-            <div class="field-group"><label>Department</label> <input id="department" data-cy="modal-department"  type="text" value="${e(record.department || "")}" /></div>
+            <div class="field-group"><label>First Name</label> <input id="firstName"  data-cy="modalFirstName"  type="text" value="${e(record.firstName || "")}" /></div>
+            <div class="field-group"><label>Last Name</label>  <input id="lastName"   data-cy="modalLastName"   type="text" value="${e(record.lastName || "")}" /></div>
+            <div class="field-group"><label>Email</label>      <input id="userEmail"  data-cy="modalEmail"       type="text" value="${e(record.email || "")}" /></div>
+            <div class="field-group"><label>Age</label>        <input id="age"        data-cy="modalAge"         type="text" value="${e(record.age || "")}" /></div>
+            <div class="field-group"><label>Salary</label>     <input id="salary"     data-cy="modalSalary"      type="text" value="${e(record.salary || "")}" /></div>
+            <div class="field-group"><label>Department</label> <input id="department" data-cy="modalDepartment"  type="text" value="${e(record.department || "")}" /></div>
           </div>
           <div class="modal-footer">
-            <button class="btn-cancel" data-cy="modal-cancel-btn">Close</button>
-            <button id="submit"        data-cy="modal-submit-btn">Submit</button>
+            <button class="btn-cancel" data-cy="modalCancelBtn">Close</button>
+            <button id="submit"        data-cy="modalSubmitBtn">Submit</button>
           </div>
         </div>`;
     },
@@ -194,9 +194,9 @@
       document.getElementById("current-page-num").textContent =
         Pagination.currentPage;
       document.getElementById("total-pages-display").textContent = totalPages;
-      document.querySelector("[data-cy='prev-page-btn']").disabled =
+      document.querySelector("[data-cy='prevPageBtn']").disabled =
         Pagination.currentPage <= 1;
-      document.querySelector("[data-cy='next-page-btn']").disabled =
+      document.querySelector("[data-cy='nextPageBtn']").disabled =
         Pagination.currentPage >= totalPages;
     },
   };
@@ -219,14 +219,14 @@
       const overlay = document.createElement("div");
       overlay.className = "modal-overlay";
       overlay.id = "wt-modal-overlay";
-      overlay.setAttribute("data-cy", "modal-overlay");
+      overlay.setAttribute("data-cy", "modalOverlay");
       overlay.innerHTML = Renderer.modalHtml(title, record);
 
       overlay
-        .querySelector("[data-cy='modal-submit-btn']")
+        .querySelector("[data-cy='modalSubmitBtn']")
         .addEventListener("click", () => this._submit());
       overlay
-        .querySelector("[data-cy='modal-cancel-btn']")
+        .querySelector("[data-cy='modalCancelBtn']")
         .addEventListener("click", () => this.close());
 
       document.body.appendChild(overlay);
@@ -317,7 +317,7 @@
         .addEventListener("click", () => Modal.open(-1));
 
       document
-        .querySelector("[data-cy='prev-page-btn']")
+        .querySelector("[data-cy='prevPageBtn']")
         .addEventListener("click", () => {
           if (Pagination.currentPage > 1) {
             Pagination.currentPage--;
@@ -326,7 +326,7 @@
         });
 
       document
-        .querySelector("[data-cy='next-page-btn']")
+        .querySelector("[data-cy='nextPageBtn']")
         .addEventListener("click", () => {
           const total = Pagination.getTotalPages(
             DataStore.filter(this.searchText).length,

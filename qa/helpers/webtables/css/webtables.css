@@ -178,7 +178,7 @@ select[aria-label="rows per page"] {
   z-index: 1000;
 }
 
-[data-cy="registration-modal"] {
+[data-cy="registrationModal"] {
   background: #ffffff;
   border-radius: 6px;
   min-width: 460px;

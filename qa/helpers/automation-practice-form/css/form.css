@@ -316,7 +316,7 @@ textarea:focus {
   text-align: right;
 }
 
-[data-cy="close-modal-btn"] {
+[data-cy="closeModalBtn"] {
   padding: 6px 16px;
   background: #6c757d;
   color: #ffffff;

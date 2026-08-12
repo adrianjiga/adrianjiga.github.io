@@ -9,39 +9,39 @@
 <body>
   <h1>Automation Practice Form</h1>
 
-  <form data-cy="practice-form">
+  <form data-cy="practiceForm">
 
     <div class="two-col">
       <div class="form-group">
         <label class="field-label" for="firstName">First Name</label>
-        <input type="text" id="firstName" data-cy="first-name-input" placeholder="First Name" />
+        <input type="text" id="firstName" data-cy="firstNameInput" placeholder="First Name" />
       </div>
       <div class="form-group">
         <label class="field-label" for="lastName">Last Name</label>
-        <input type="text" id="lastName" data-cy="last-name-input" placeholder="Last Name" />
+        <input type="text" id="lastName" data-cy="lastNameInput" placeholder="Last Name" />
       </div>
     </div>
 
     <div class="form-group">
       <label class="field-label" for="userEmail">Email</label>
-      <input type="email" id="userEmail" data-cy="email-input" placeholder="name@example.com" />
+      <input type="email" id="userEmail" data-cy="emailInput" placeholder="name@example.com" />
     </div>
 
     <div class="form-group">
       <label class="field-label">Gender</label>
-      <div class="gender-group" data-cy="gender-group">
-        <input type="radio" id="gender-radio-1" name="gender" value="Male"   data-cy="gender-male"   />
-        <label for="gender-radio-1" data-cy="gender-male-label">Male</label>
-        <input type="radio" id="gender-radio-2" name="gender" value="Female" data-cy="gender-female" />
-        <label for="gender-radio-2" data-cy="gender-female-label">Female</label>
-        <input type="radio" id="gender-radio-3" name="gender" value="Other"  data-cy="gender-other"  />
-        <label for="gender-radio-3" data-cy="gender-other-label">Other</label>
+      <div class="gender-group" data-cy="genderGroup">
+        <input type="radio" id="gender-radio-1" name="gender" value="Male"   data-cy="genderMale"   />
+        <label for="gender-radio-1" data-cy="genderMaleLabel">Male</label>
+        <input type="radio" id="gender-radio-2" name="gender" value="Female" data-cy="genderFemale" />
+        <label for="gender-radio-2" data-cy="genderFemaleLabel">Female</label>
+        <input type="radio" id="gender-radio-3" name="gender" value="Other"  data-cy="genderOther"  />
+        <label for="gender-radio-3" data-cy="genderOtherLabel">Other</label>
       </div>
     </div>
 
     <div class="form-group">
       <label class="field-label" for="userNumber">Mobile</label>
-      <input type="text" id="userNumber" data-cy="mobile-input" placeholder="Mobile Number" />
+      <input type="text" id="userNumber" data-cy="mobileInput" placeholder="Mobile Number" />
     </div>
 
     <div class="form-group">
@@ -50,13 +50,13 @@
         <input
           type="text"
           id="dateOfBirthInput"
-          data-cy="date-of-birth-input"
+          data-cy="dateOfBirthInput"
           placeholder="Date of Birth"
           readonly
         />
-        <div id="datepickerPopup" data-cy="datepicker-popup" style="display:none;">
+        <div id="datepickerPopup" data-cy="datepickerPopup" style="display:none;">
           <div class="date-picker-header">
-            <select id="dp-month" data-cy="month-select" aria-label="Month">
+            <select id="dp-month" data-cy="monthSelect" aria-label="Month">
               <option value="0">January</option>
               <option value="1">February</option>
               <option value="2">March</option>
@@ -70,11 +70,11 @@
               <option value="10">November</option>
               <option value="11">December</option>
             </select>
-            <select id="dp-year" data-cy="year-select" aria-label="Year">
+            <select id="dp-year" data-cy="yearSelect" aria-label="Year">
               <!-- populated by DatePicker.init() -->
             </select>
           </div>
-          <div class="date-picker-grid" id="dp-days-grid" data-cy="days-grid">
+          <div class="date-picker-grid" id="dp-days-grid" data-cy="daysGrid">
             <div class="day-name">Su</div>
             <div class="day-name">Mo</div>
             <div class="day-name">Tu</div>
@@ -90,12 +90,12 @@
 
     <div class="form-group">
       <label class="field-label" for="subjectsInput">Subjects</label>
-      <div class="subjects-wrapper" data-cy="subjects-wrapper">
-        <div id="subjects-chips" data-cy="subjects-chips"></div>
+      <div class="subjects-wrapper" data-cy="subjectsWrapper">
+        <div id="subjects-chips" data-cy="subjectsChips"></div>
         <input
           type="text"
           id="subjectsInput"
-          data-cy="subjects-input"
+          data-cy="subjectsInput"
           placeholder="Select subjects"
           autocomplete="off"
         />
@@ -104,76 +104,76 @@
 
     <div class="form-group">
       <label class="field-label">Hobbies</label>
-      <div class="hobbies-group" data-cy="hobbies-group">
-        <label class="hobby-item" data-cy="hobby-sports-label">
-          <input type="checkbox" id="hobbies-checkbox-1" data-cy="hobby-sports"  value="Sports"  /> Sports
+      <div class="hobbies-group" data-cy="hobbiesGroup">
+        <label class="hobby-item" data-cy="hobbySportsLabel">
+          <input type="checkbox" id="hobbies-checkbox-1" data-cy="hobbySports"  value="Sports"  /> Sports
         </label>
-        <label class="hobby-item" data-cy="hobby-reading-label">
-          <input type="checkbox" id="hobbies-checkbox-2" data-cy="hobby-reading" value="Reading" /> Reading
+        <label class="hobby-item" data-cy="hobbyReadingLabel">
+          <input type="checkbox" id="hobbies-checkbox-2" data-cy="hobbyReading" value="Reading" /> Reading
         </label>
-        <label class="hobby-item" data-cy="hobby-music-label">
-          <input type="checkbox" id="hobbies-checkbox-3" data-cy="hobby-music"   value="Music"   /> Music
+        <label class="hobby-item" data-cy="hobbyMusicLabel">
+          <input type="checkbox" id="hobbies-checkbox-3" data-cy="hobbyMusic"   value="Music"   /> Music
         </label>
       </div>
     </div>
 
     <div class="form-group">
       <label class="field-label" for="uploadPicture">Picture</label>
-      <input type="file" id="uploadPicture" data-cy="upload-picture" />
+      <input type="file" id="uploadPicture" data-cy="uploadPicture" />
     </div>
 
     <div class="form-group">
       <label class="field-label" for="currentAddress">Current Address</label>
-      <textarea id="currentAddress" data-cy="address-input" rows="2" placeholder="Current Address"></textarea>
+      <textarea id="currentAddress" data-cy="addressInput" rows="2" placeholder="Current Address"></textarea>
     </div>
 
     <div class="two-col">
       <div class="form-group">
         <label class="field-label">Country</label>
-        <div id="state" class="select-dropdown" data-cy="state-dropdown">
-          <div class="select-control" data-cy="state-control">
-            <span id="state-display" data-cy="state-display" class="select-placeholder">Select Country</span>
+        <div id="state" class="select-dropdown" data-cy="stateDropdown">
+          <div class="select-control" data-cy="stateControl">
+            <span id="state-display" data-cy="stateDisplay" class="select-placeholder">Select Country</span>
             <span class="select-arrow">&#9660;</span>
           </div>
-          <div class="select-menu" id="state-menu" data-cy="state-menu" style="display:none;">
-            <div class="select-option" data-cy="state-option-germany"     data-state-idx="0">Germany</div>
-            <div class="select-option" data-cy="state-option-france"      data-state-idx="1">France</div>
-            <div class="select-option" data-cy="state-option-spain"       data-state-idx="2">Spain</div>
-            <div class="select-option" data-cy="state-option-italy"       data-state-idx="3">Italy</div>
-            <div class="select-option" data-cy="state-option-netherlands" data-state-idx="4">Netherlands</div>
+          <div class="select-menu" id="state-menu" data-cy="stateMenu" style="display:none;">
+            <div class="select-option" data-cy="stateOptionGermany"     data-state-idx="0">Germany</div>
+            <div class="select-option" data-cy="stateOptionFrance"      data-state-idx="1">France</div>
+            <div class="select-option" data-cy="stateOptionSpain"       data-state-idx="2">Spain</div>
+            <div class="select-option" data-cy="stateOptionItaly"       data-state-idx="3">Italy</div>
+            <div class="select-option" data-cy="stateOptionNetherlands" data-state-idx="4">Netherlands</div>
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label class="field-label">City</label>
-        <div id="city" class="select-dropdown" data-cy="city-dropdown">
-          <div class="select-control" data-cy="city-control">
-            <span id="city-display" data-cy="city-display" class="select-placeholder">Select City</span>
+        <div id="city" class="select-dropdown" data-cy="cityDropdown">
+          <div class="select-control" data-cy="cityControl">
+            <span id="city-display" data-cy="cityDisplay" class="select-placeholder">Select City</span>
             <span class="select-arrow">&#9660;</span>
           </div>
-          <div class="select-menu" id="city-menu" data-cy="city-menu" style="display:none;"></div>
+          <div class="select-menu" id="city-menu" data-cy="cityMenu" style="display:none;"></div>
         </div>
       </div>
     </div>
 
-    <button type="button" id="submit" data-cy="submit-btn">Submit</button>
+    <button type="button" id="submit" data-cy="submitBtn">Submit</button>
   </form>
 
   <!-- Success modal -->
-  <div class="modal-overlay" id="success-modal" data-cy="success-modal" style="display:none;">
+  <div class="modal-overlay" id="success-modal" data-cy="successModal" style="display:none;">
     <div class="modal-dialog">
-      <div class="modal-content" data-cy="modal-content">
+      <div class="modal-content" data-cy="modalContent">
         <div class="modal-header">
-          <h2 data-cy="modal-title">Thanks for submitting the form</h2>
+          <h2 data-cy="modalTitle">Thanks for submitting the form</h2>
         </div>
         <div class="modal-body">
-          <table data-cy="result-table">
+          <table data-cy="resultTable">
             <tbody id="result-tbody"></tbody>
           </table>
         </div>
         <div class="modal-footer">
-          <button data-cy="close-modal-btn">Close</button>
+          <button data-cy="closeModalBtn">Close</button>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@
       });
 
     document
-      .querySelector('[data-cy="dynamic-click-btn"]')
+      .querySelector('[data-cy="dynamicClickBtn"]')
       .addEventListener("click", () => showMessage("dynamicClickMessage"));
   }
 
