@@ -68,10 +68,10 @@
         .addEventListener("change", () => this._renderDays());
 
       document
-        .getElementById("date-of-birth-input")
+        .getElementById("dateOfBirthInput")
         .addEventListener("click", (e) => {
           e.stopPropagation();
-          const popup = document.getElementById("datepicker-popup");
+          const popup = document.getElementById("datepickerPopup");
           if (popup.style.display === "none") {
             this._renderDays();
             popup.style.display = "block";
@@ -82,12 +82,12 @@
 
       // Stop clicks inside the popup from bubbling to the document close handler.
       document
-        .getElementById("datepicker-popup")
+        .getElementById("datepickerPopup")
         .addEventListener("click", (e) => e.stopPropagation());
     },
 
     close() {
-      document.getElementById("datepicker-popup").style.display = "none";
+      document.getElementById("datepickerPopup").style.display = "none";
     },
 
     _initYears() {
@@ -126,7 +126,7 @@
         cell.dataset.day = padded;
         cell.dataset.month = month;
         cell.dataset.year = year;
-        cell.setAttribute("data-cy", `day-${padded}`);
+        cell.setAttribute("data-cy", `day${padded}`);
         cell.addEventListener("click", () => this._pickDay(cell));
         grid.appendChild(cell);
       }
@@ -141,7 +141,7 @@
         monthName: MONTH_NAMES[month],
         year,
       };
-      document.getElementById("date-of-birth-input").value =
+      document.getElementById("dateOfBirthInput").value =
         `${padded} ${MONTH_NAMES[month]} ${year}`;
       this.close();
     },
@@ -153,7 +153,7 @@
   const SubjectsInput = {
     init() {
       document
-        .getElementById("subjects-input")
+        .getElementById("subjectsInput")
         .addEventListener("keydown", (e) => {
           if (e.key !== "Enter") {
             return;
@@ -174,8 +174,8 @@
       FormState.subjects.forEach((s, i) => {
         const chip = document.createElement("span");
         chip.className = "subject-chip";
-        chip.setAttribute("data-cy", `subject-chip-${i}`);
-        chip.innerHTML = `${esc(s)} <span class="remove" data-cy="remove-subject-${i}" data-index="${i}">&#215;</span>`;
+        chip.setAttribute("data-cy", `subjectChip${i}`);
+        chip.innerHTML = `${esc(s)} <span class="remove" data-cy="removeSubject${i}" data-index="${i}">&#215;</span>`;
         chip.querySelector(".remove").addEventListener("click", (ev) => {
           FormState.subjects.splice(parseInt(ev.target.dataset.index, 10), 1);
           this._render();
@@ -241,10 +241,9 @@
       (COUNTRY_CITIES[name] || []).forEach((city) => {
         const opt = document.createElement("div");
         opt.className = "select-option";
-        opt.setAttribute(
-          "data-cy",
-          `city-option-${city.toLowerCase().replace(/\s+/g, "-")}`,
-        );
+        // "The Hague" -> cityOptionTheHague. Cities arrive capitalised already, so the only
+        // work is removing the spaces; lower-casing would flatten the camel humps.
+        opt.setAttribute("data-cy", `cityOption${city.replace(/\s+/g, "")}`);
         opt.textContent = city;
         opt.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -289,7 +288,7 @@
       }
 
       // Validate date of birth — must be selected via the date picker
-      const dobInput = document.getElementById("date-of-birth-input");
+      const dobInput = document.getElementById("dateOfBirthInput");
       if (!FormState.selectedDOB.day) {
         this._markError(dobInput);
         valid = false;
@@ -321,7 +320,7 @@
       document.getElementById("result-tbody").innerHTML = rows
         .map(
           (r, i) =>
-            `<tr data-cy="result-row-${i}"><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`,
+            `<tr data-cy="resultRow${i}"><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`,
         )
         .join("");
       document.getElementById("success-modal").style.display = "flex";
@@ -352,7 +351,7 @@
         .addEventListener("click", () => this._submit());
 
       document
-        .querySelector('[data-cy="close-modal-btn"]')
+        .querySelector('[data-cy="closeModalBtn"]')
         .addEventListener("click", () => SuccessModal.close());
 
       // Global click closes all open overlays (datepicker, dropdowns).

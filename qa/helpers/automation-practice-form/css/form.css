@@ -82,12 +82,12 @@ textarea:focus {
   width: 100%;
 }
 
-#date-of-birth-input {
+#dateOfBirthInput {
   cursor: pointer;
   background: #ffffff;
 }
 
-#datepicker-popup {
+#datepickerPopup {
   position: absolute;
   top: 100%;
   left: 0;
@@ -175,7 +175,7 @@ textarea:focus {
   font-weight: bold;
 }
 
-#subjects-input {
+#subjectsInput {
   border: none;
   outline: none;
   flex: 1;
@@ -316,7 +316,7 @@ textarea:focus {
   text-align: right;
 }
 
-[data-cy="close-modal-btn"] {
+[data-cy="closeModalBtn"] {
   padding: 6px 16px;
   background: #6c757d;
   color: #ffffff;

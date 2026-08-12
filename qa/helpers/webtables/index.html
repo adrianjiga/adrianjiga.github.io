@@ -12,17 +12,17 @@
   <div class="toolbar" data-cy="toolbar">
     <input
       type="text"
-      id="search-box"
-      data-cy="search-box"
+      id="searchBox"
+      data-cy="searchBox"
       placeholder="Type to search..."
       aria-label="Search records"
     />
-    <button id="add-record-btn" data-cy="add-record-btn">+ Add</button>
+    <button id="addNewRecordButton" data-cy="addRecordBtn">+ Add</button>
   </div>
 
-  <div class="table-wrapper" data-cy="table-wrapper">
+  <div class="table-wrapper" data-cy="tableWrapper">
     <table data-cy="table">
-      <thead data-cy="table-header">
+      <thead data-cy="tableHeader">
         <tr>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
@@ -33,24 +33,24 @@
           <th scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody id="table-body" data-cy="table-body"></tbody>
+      <tbody id="table-body" data-cy="tableBody"></tbody>
     </table>
   </div>
 
   <div class="pagination-bar" data-cy="pagination">
-    <button class="pagination-btn -previous" data-cy="prev-page-btn">Previous</button>
-    <div class="page-info" data-cy="page-info">
+    <button class="pagination-btn -previous" data-cy="prevPageBtn">Previous</button>
+    <div class="page-info" data-cy="pageInfo">
       <span>Page</span>
-      <strong id="current-page-num" data-cy="current-page">1</strong>
+      <strong id="current-page-num" data-cy="currentPage">1</strong>
       <span>of</span>
-      <span id="total-pages-display" data-cy="total-pages">1</span>
+      <span id="total-pages-display" data-cy="totalPages">1</span>
     </div>
-    <button class="pagination-btn -next" data-cy="next-page-btn">Next</button>
+    <button class="pagination-btn -next" data-cy="nextPageBtn">Next</button>
     <div class="rows-per-page">
       <label for="rows-per-page-sel">Rows per page:</label>
       <select
         id="rows-per-page-sel"
-        data-cy="rows-per-page-select"
+        data-cy="rowsPerPageSelect"
       >
         <option value="5">5 rows</option>
         <option value="10" selected>10 rows</option>
