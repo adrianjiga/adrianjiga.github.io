@@ -3,10 +3,10 @@
  * Imports and initializes all modules
  */
 
-import { initCursorTrail } from "./cursor-trail.js";
+import { initCursorTrail } from "./cursorTrail.js";
 import { initParallax } from "./parallax.js";
-import { initScrollIndicator, initCardReveal } from "./scroll-effects.js";
-import { initThemeToggle } from "./theme-toggle.js";
+import { initScrollIndicator, initCardReveal } from "./scrollEffects.js";
+import { initThemeToggle } from "./themeToggle.js";
 
 /**
  * Initializes all modules. type="module" scripts are deferred automatically,
@@ -26,7 +26,7 @@ function init() {
     initCardReveal();
 
     // Dynamic content
-    const yearEl = document.querySelector("#current-year");
+    const yearEl = document.querySelector("#currentYear");
     if (yearEl) {
       yearEl.textContent = String(new Date().getFullYear());
     }
