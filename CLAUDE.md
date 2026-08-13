@@ -58,7 +58,7 @@ expect a window where CI is red and merge the site first.
 ## Styling conventions
 
 - The root `index.html` (portfolio) uses a dark theme defined entirely with CSS custom properties in `:root` — the palette is `--acid*`, `--blue*`, `--red*`, plus `--bgPrimary`, `--textPrimary`, `--borderColor`.
-- The `qa/` pages each carry their own stylesheet under `qa/helpers/<name>/css/`. None of them use an inline `<style>` block, and there is no stylesheet shared between them.
+- The `qa/helpers/<name>/` pages each carry their own stylesheet under their own `css/`. None of them use an inline `<style>` block, and there is no stylesheet shared between them. The `qa/` section's own index pages (`qa/index.html`, `qa/helpers/index.html`, `qa/architecture/index.html`) are the exception: they are self-contained and style themselves inline.
 - Google Fonts (`Bebas Neue`, `IBM Plex Mono`) are loaded only by the portfolio homepage.
 
 ## Naming conventions
