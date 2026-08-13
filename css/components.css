@@ -17,25 +17,25 @@
 
 .btnPrimary {
   background: var(--acid);
-  color: var(--acid-text);
+  color: var(--acidText);
   border-color: var(--acid);
 }
 
 .btnPrimary:hover {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  color: var(--bg-primary);
+  background: var(--textPrimary);
+  border-color: var(--textPrimary);
+  color: var(--bgPrimary);
 }
 
 .btnSecondary {
   background: transparent;
-  color: var(--text-primary);
-  border-color: var(--border-color);
+  color: var(--textPrimary);
+  border-color: var(--borderColor);
 }
 
 .btnSecondary:hover {
-  background: var(--text-primary);
-  color: var(--bg-primary);
+  background: var(--textPrimary);
+  color: var(--bgPrimary);
 }
 
 /* Cards */
@@ -47,7 +47,7 @@
 
 .card {
   padding: 1.5rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--borderColor);
   position: relative;
   transition: all 0.3s;
   display: flex;
@@ -85,7 +85,7 @@
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
-  color: var(--text-primary);
+  color: var(--textPrimary);
 }
 
 .cardTitle::before {
@@ -126,13 +126,13 @@
   gap: 0;
   margin-top: 6rem;
   margin-bottom: 3rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--borderColor);
   animation: fadeIn 1s ease-out 1.2s both;
 }
 
 .stat {
   padding: 2rem;
-  border-right: 2px solid var(--border-color);
+  border-right: 2px solid var(--borderColor);
   position: relative;
   overflow: hidden;
 }

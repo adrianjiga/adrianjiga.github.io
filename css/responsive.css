@@ -52,11 +52,11 @@
 
   .stat:nth-child(1),
   .stat:nth-child(2) {
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--borderColor);
   }
 
   .stat:nth-child(odd) {
-    border-right: 2px solid var(--border-color);
+    border-right: 2px solid var(--borderColor);
   }
 
   .stat:nth-child(even) {
@@ -70,7 +70,7 @@
 
   .stat {
     border-right: none;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--borderColor);
   }
 
   .shape1,

@@ -26,7 +26,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--borderColor);
   animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -47,7 +47,7 @@ nav {
 }
 
 nav a {
-  color: var(--text-primary);
+  color: var(--textPrimary);
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -79,8 +79,8 @@ nav a:hover::after {
 /* Theme Toggle Button */
 .themeToggle {
   background: none;
-  border: 2px solid var(--border-color);
-  color: var(--text-primary);
+  border: 2px solid var(--borderColor);
+  color: var(--textPrimary);
   padding: 0.5rem;
   cursor: pointer;
   border-radius: 4px;
@@ -95,7 +95,7 @@ nav a:hover::after {
 .themeToggle:hover {
   background: var(--acid);
   border-color: var(--acid);
-  color: var(--acid-text);
+  color: var(--acidText);
 }
 
 .themeToggle svg {
@@ -132,7 +132,7 @@ nav a:hover::after {
 /* Sections */
 section {
   padding: 6rem 4rem;
-  border-top: 2px solid var(--border-color);
+  border-top: 2px solid var(--borderColor);
 }
 
 .sectionTitle {
