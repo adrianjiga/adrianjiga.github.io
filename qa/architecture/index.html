@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Automation Architecture</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 860px;
+      margin: 64px auto;
+      padding: 0 24px;
+      color: #24292e;
+      line-height: 1.65;
+    }
+    h1 { font-size: 2rem; border-bottom: 2px solid #0366d6; padding-bottom: 12px; margin-bottom: 20px; }
+    h2 { font-size: 1.35rem; margin-top: 48px; border-bottom: 1px solid #e1e4e8; padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin-top: 28px; }
+    p, li { font-size: 1rem; color: #333; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      background: #f6f8fa; padding: 2px 5px; border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.87em;
+    }
+    pre {
+      background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px;
+      padding: 16px; overflow-x: auto; line-height: 1.45;
+    }
+    pre code { background: none; padding: 0; font-size: 0.82rem; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; display: block; overflow-x: auto; }
+    th, td { border: 1px solid #e1e4e8; padding: 8px 12px; text-align: left; font-size: 0.93rem; }
+    th { background: #f6f8fa; font-weight: 600; }
+    blockquote {
+      margin: 20px 0; padding: 12px 18px; border-left: 4px solid #0366d6;
+      background: #f6f8fa; color: #444;
+    }
+    .lede { font-size: 1.08rem; color: #555; }
+    .repoList { list-style: none; padding-left: 0; }
+    .repoList li { margin: 14px 0; padding-left: 14px; border-left: 3px solid #e1e4e8; }
+    .repoRole { color: #666; font-size: 0.9rem; display: block; }
+    .repoTag {
+      display: inline-block; background: #eaecef; color: #555; font-size: 0.68rem;
+      padding: 2px 7px; border-radius: 10px; vertical-align: middle; margin-left: 4px;
+    }
+    .callout {
+      background: #fffbdd; border: 1px solid #f0e2a5; border-radius: 6px;
+      padding: 14px 18px; margin: 20px 0;
+    }
+    footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid #e1e4e8; color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>Test Automation Architecture</h1>
+
+  <p class="lede">
+    Six repositories that look independent on GitHub but behave as one system. This page
+    documents how they fit together, which decisions were deliberate, and what is still wrong
+    with them.
+  </p>
+
+  <h2>The repositories</h2>
+
+  <ul class="repoList">
+    <li>
+      <strong><a href="/qa/helpers">adrianjiga.github.io</a></strong>
+      <span class="repoRole">The system under test. Self-hosted helper pages that replicate
+      common interaction patterns — buttons, a CRUD table, a registration form with a custom
+      date picker and cascading dropdowns.</span>
+    </li>
+    <li>
+      <strong><a href="https://github.com/adrianjiga/CypressAutomationExample">CypressAutomationExample</a></strong>
+      <span class="repoRole">UI, API and table coverage in Cypress. Page objects as object literals.</span>
+    </li>
+    <li>
+      <strong><a href="https://github.com/adrianjiga/PlaywrightAutomationExample">PlaywrightAutomationExample</a></strong>
+      <span class="repoRole">The same surface in Playwright, plus a browser × viewport project matrix.</span>
+    </li>
+    <li>
+      <strong><a href="https://github.com/adrianjiga/SeleniumAutomationExample">SeleniumAutomationExample</a></strong>
+      <span class="repoRole">The same surface in Java — Selenium, TestNG, REST Assured, Allure.</span>
+    </li>
+    <li>
+      <strong><a href="https://github.com/adrianjiga/WebQualityAnalyzer">WebQualityAnalyzer</a></strong>
+      <span class="repoRole">A browser extension for accessibility, SEO and performance analysis —
+      which also publishes its engine as a plain browser bundle, so test suites can inject it.</span>
+    </li>
+    <li>
+      <strong>TestSuiteVitals</strong> <span class="repoTag">private</span>
+      <span class="repoRole">A CLI that retroactively ingests CI artifacts and surfaces flaky
+      tests. Zero infrastructure — it reads what CI already produced.</span>
+    </li>
+  </ul>
+
+  <h2>How they connect</h2>
+
+  <pre><code>                        adrianjiga.github.io
+                     (helper pages + data-cy hooks)
+                                  ▲
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+        Cypress suite       Playwright suite     Selenium suite
+              │                   │                   │
+              │   inject          │   inject          │   inject
+              └──────────► WebQualityAnalyzer ◄───────┘
+                          (accessibility engine)
+              │                   │                   │
+              │   JUnit XML / blob reports as CI artifacts
+              └───────────────────┼───────────────────┘
+                                  ▼
+                           TestSuiteVitals
+                      (flake + reliability analytics)</code></pre>
+
+  <p>
+    Three edges, three different integration mechanisms, and each one is a deliberate choice:
+  </p>
+
+  <table>
+    <tr><th>Edge</th><th>Mechanism</th><th>Why</th></tr>
+    <tr>
+      <td>Suites → site</td>
+      <td><code>data-cy</code> attributes over HTTP</td>
+      <td>A published contract. The only coupling that is allowed to exist.</td>
+    </tr>
+    <tr>
+      <td>Suites → analyzer</td>
+      <td>npm <code>github:</code> dependency (JS) / build-time fetch (Java)</td>
+      <td>One engine, three consumers. Nothing is vendored, so nothing drifts.</td>
+    </tr>
+    <tr>
+      <td>Suites → analytics</td>
+      <td>CI artifacts, read after the fact</td>
+      <td>No push, no service, no coupling. Suites do not know the analyser exists.</td>
+    </tr>
+  </table>
+
+  <h2>The contract: <code>data-cy</code></h2>
+
+  <p>
+    Every element a test touches carries a <code>data-cy</code> attribute, and that attribute is
+    the <strong>only</strong> thing the suites are permitted to select on. No ids, no
+    <code>label[for=…]</code>, no CSS classes, no XPath.
+  </p>
+
+  <p>
+    This is the load-bearing decision in the whole portfolio, because it converts an implicit
+    dependency into an explicit one. Ids and class names exist to serve the page — they get
+    renamed when the markup is refactored, and under a class-based test suite that refactor
+    silently breaks tests that had no business caring. A <code>data-cy</code> hook has exactly
+    one purpose, so changing one is unambiguously a breaking change to a published interface.
+  </p>
+
+  <p>
+    The proof arrived when the entire portfolio was converted to camelCase. Renaming ~30 DOM ids
+    and every CSS class on the helper pages touched <em>nothing</em> in the three suites, because
+    no suite had ever been allowed to depend on them. The hooks were a separate, deliberate
+    migration.
+  </p>
+
+  <h3>The consequence nobody mentions</h3>
+
+  <p>
+    A contract with two sides in different repositories cannot be changed atomically. The suites
+    run against the <em>deployed</em> site, so there is no merge order that avoids a red window:
+  </p>
+
+  <ul>
+    <li>Merge the site first → suites fail until their PRs land.</li>
+    <li>Merge the suites first → they fail until the site deploys.</li>
+  </ul>
+
+  <p>
+    Site-first is the better of the two, because the failure is loud and expected rather than a
+    passing suite asserting against markup that no longer exists. During the hook migration this
+    played out exactly as predicted: the site merged at 17:36:56, CI fired at 17:37:28–17:38:06,
+    and the runs straddled the GitHub Pages deploy. Playwright failed twice and passed on its
+    third attempt; Cypress landed a few seconds too early and passed on re-run.
+  </p>
+
+  <div class="callout">
+    <strong>That pattern normally means a retry is masking a real defect.</strong> Here it did
+    not — but the only way to know was to check the deployed bytes and the run timestamps rather
+    than accept a green tick. A retry that hides a deploy race and a retry that hides a genuine
+    bug are indistinguishable from the summary screen.
+  </div>
+
+  <h2>One pattern, three idioms</h2>
+
+  <p>
+    All three suites implement the Page Object Model, and all three look idiomatic for their
+    ecosystem rather than like a translation of one another:
+  </p>
+
+  <table>
+    <tr><th></th><th>Cypress</th><th>Playwright</th><th>Selenium</th></tr>
+    <tr>
+      <td>Page object</td>
+      <td>Exported object literal</td>
+      <td>Class with a <code>page</code> field</td>
+      <td>Class taking <code>WebDriver</code> + <code>WebDriverWait</code></td>
+    </tr>
+    <tr>
+      <td>Chaining</td>
+      <td><code>return this</code></td>
+      <td><code>return this</code> (async)</td>
+      <td><code>return this</code></td>
+    </tr>
+    <tr>
+      <td>Waiting</td>
+      <td>Built-in retry-ability</td>
+      <td>Auto-waiting locators</td>
+      <td>Explicit <code>WebDriverWait</code></td>
+    </tr>
+    <tr>
+      <td>Parallelism</td>
+      <td>Per-spec processes</td>
+      <td>Workers × projects</td>
+      <td>TestNG <code>parallel="classes"</code></td>
+    </tr>
+  </table>
+
+  <p>
+    The Selenium suite is capped at class-level parallelism on purpose: its base test holds
+    <code>driver</code> and <code>wait</code> as instance fields, which is safe per class but
+    would race under method-level parallelism. Raising that ceiling means introducing a
+    <code>ThreadLocal&lt;WebDriver&gt;</code> first — a real change, not a config flag, and the
+    kind of limit worth writing down before someone discovers it as flakiness.
+  </p>
+
+  <h2>Accessibility as a shared engine</h2>
+
+  <p>
+    Rather than three suites each adopting a different accessibility library, all three inject
+    the same bundle from WebQualityAnalyzer — the engine that already backs its browser
+    extension. SEO and performance analysis are switched off: they audit the <em>page</em>, not
+    the behaviour under test, and a missing meta description is not a defect of a test fixture.
+  </p>
+
+  <p>
+    Getting a browser bundle into three ecosystems takes three mechanisms, and each has a trap:
+  </p>
+
+  <ul>
+    <li><strong>Playwright</strong> — <code>addScriptTag</code> with a resolved package path.</li>
+    <li><strong>Cypress</strong> — read the file in Node, inject a <code>&lt;script&gt;</code>
+      element into the AUT window. <code>win.eval()</code> also works, but only because a method
+      call on <code>win</code> is an <em>indirect</em> eval; a bare <code>eval()</code> would
+      evaluate in local scope and the global would never appear.</li>
+    <li><strong>Selenium</strong> — the bundle is fetched at build time by Maven and injected as
+      a <code>&lt;script&gt;</code> element. It cannot be handed to
+      <code>executeScript</code> directly: Selenium wraps scripts in an anonymous function, so
+      the bundle's top-level <code>var</code> would become a local that vanishes on return.</li>
+  </ul>
+
+  <p>
+    Java has no npm, so the analyser is <strong>downloaded during the build</strong> rather than
+    vendored into the repository. A committed copy would be a second source of truth that goes
+    stale the moment the analyser changes, with nothing to notice.
+  </p>
+
+  <h3>Baselines that shrink</h3>
+
+  <p>
+    Each page declares its known accessibility issues, and the assertion runs in both directions:
+    a <strong>new</strong> issue fails, and a baseline entry that <strong>no longer occurs</strong>
+    also fails.
+  </p>
+
+  <blockquote>
+    Without the second direction, a baseline is just a suppression list: it only ever grows, and
+    nothing ever tells you an entry went stale. With it, fixing a page <em>forces</em> the
+    baseline to shrink.
+  </blockquote>
+
+  <p>
+    All baselines are currently empty, so the pages are held at zero. That is only meaningful
+    because it was checked: an empty baseline passes just as happily when the audit is silently
+    returning nothing. Injecting an <code>&lt;img&gt;</code> with no <code>alt</code> moves the
+    score from 100 to 97 and produces a finding, which is what makes the zeros evidence rather
+    than an assumption.
+  </p>
+
+  <h2>Reading the results back</h2>
+
+  <p>
+    TestSuiteVitals ingests what CI already uploaded — JUnit XML, Playwright blob reports,
+    mochawesome JSON — and reconstructs reliability history without any service to run. Two
+    decisions carry it:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Test identity is <code>hash(file + title_path)</code>.</strong> Not the display
+      name, and never the suite label. When a TestNG suite name leaked into the file field, a
+      single test fragmented into three identities and its history silently split.
+    </li>
+    <li>
+      <strong>The dedup key is <code>(run_id, run_attempt, id, matrix)</code>, and the matrix is
+      deliberately not part of identity.</strong> Same test, two browsers, is one test with two
+      results — not two tests. Before the matrix was populated, a Cypress run parsed 3,360
+      results and stored 720: everything but the last browser was silently overwritten, which
+      made browser-specific failures invisible.
+    </li>
+  </ul>
+
+  <h2>The rule that keeps reappearing</h2>
+
+  <p>
+    One theme surfaced in every repository, in a different disguise each time:
+  </p>
+
+  <blockquote>
+    A fact that lives in two places diverges. The only reliable fix is to delete one of them.
+  </blockquote>
+
+  <table>
+    <tr><th>Duplicated fact</th><th>How it went wrong</th><th>Resolution</th></tr>
+    <tr>
+      <td>Docker image tag and npm dependency version</td>
+      <td>Two pins for one version; they disagreed</td>
+      <td>Derive the image tag from the dependency</td>
+    </tr>
+    <tr>
+      <td>Coverage numbers transcribed into READMEs</td>
+      <td>Stale the moment a test was added</td>
+      <td>State where the truth lives instead of copying it</td>
+    </tr>
+    <tr>
+      <td>Analyzer bundle, if vendored per repo</td>
+      <td>Three copies aging independently</td>
+      <td>One published artifact, fetched at build time</td>
+    </tr>
+    <tr>
+      <td>DOM ids <em>and</em> <code>data-cy</code> hooks as selectors</td>
+      <td>Two parallel contracts, only one of them intentional</td>
+      <td>Hooks only; ids became implementation detail</td>
+    </tr>
+    <tr>
+      <td>Lint config contradicting the house naming style</td>
+      <td>Identifiers renamed to satisfy a tool default</td>
+      <td>Reconfigure the rule — the convention dictates the config</td>
+    </tr>
+    <tr>
+      <td>A docstring restating what the code does</td>
+      <td>Documented rule was the inverse of the implementation</td>
+      <td>Correct it, and prefer describing <em>why</em> over <em>what</em></td>
+    </tr>
+  </table>
+
+  <h2>What CI actually proves</h2>
+
+  <p>
+    Green is not the same as verified, and three specific failures here looked like passes:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Jobs that skip look like jobs that pass.</strong> A workflow's own path filters
+      excluded <code>.github/workflows/**</code>, so changing the test workflow never ran the
+      tests that would validate it. The PR showed <em>skipping</em> in a list of green ticks.
+    </li>
+    <li>
+      <strong>An artifact glob that stops matching fails silently.</strong> A merge job collected
+      shards with a wildcard; a rename would have kept matching the sharded blobs while quietly
+      dropping the responsive ones. Nothing errors — the report is just incomplete.
+    </li>
+    <li>
+      <strong>A verification can inherit the bug it is checking for.</strong> A migration missed
+      single-quoted attribute values inside double-quoted selectors, and the grep written to
+      verify it had the identical blind spot, so it reported clean. Only loading the page found it.
+    </li>
+  </ul>
+
+  <h2>Known gaps</h2>
+
+  <p>
+    Documented deliberately, because a portfolio that claims to be finished is less credible than
+    one that knows what it is missing:
+  </p>
+
+  <ul>
+    <li><strong>Selenium is Chrome-only.</strong> The base test constructs
+      <code>ChromeDriver</code> directly. Cross-browser needs a driver factory reading a
+      <code>-Dbrowser=</code> property.</li>
+    <li><strong>Selenium cannot run method-level parallel</strong> until the driver moves to a
+      <code>ThreadLocal</code>.</li>
+    <li><strong>Smoke coverage is thin</strong> — the Playwright <code>@smoke</code> tag selects
+      a single test, which is too narrow to gate a merge on.</li>
+    <li><strong>API tests assert literal values</strong> where they should assert schemas, so a
+      response shape change can pass as long as the sampled fields survive.</li>
+    <li><strong>Accessibility coverage audits rendered states, not journeys.</strong> Each page is
+      checked at load and, for the form, after submission — but not mid-interaction with a
+      dropdown open.</li>
+  </ul>
+
+  <footer>
+    Part of the <a href="/qa/">QA resources</a> section.
+    Source: <a href="https://github.com/adrianjiga/adrianjiga.github.io">adrianjiga.github.io</a>.
+  </footer>
+</body>
+</html>

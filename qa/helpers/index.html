@@ -22,13 +22,20 @@
     ul { padding-left: 20px; }
     li { margin: 10px 0; font-size: 1rem; }
     .desc { color: #666; font-size: 0.9rem; }
+    code {
+      background: #f6f8fa; padding: 2px 5px; border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.87em;
+    }
   </style>
 </head>
 <body>
   <h1>QA Helpers</h1>
   <p>
     This section contains helper pages designed as targets for automated testing.
-    Each page replicates specific UI patterns and interaction flows exercised by the CypressAutomationExample test suite.
+    Each page replicates specific UI patterns and interaction flows exercised by the Cypress,
+    Playwright and Selenium suites. Every element a test touches carries a <code>data-cy</code>
+    hook &mdash; see the <a href="/qa/architecture">architecture notes</a> for why that is the
+    only selector the suites are allowed to use.
   </p>
   <p>
     These pages are self-contained — no external frameworks or APIs required.
