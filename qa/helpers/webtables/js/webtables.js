@@ -110,7 +110,7 @@
     currentPage: 1,
 
     getPageSize() {
-      const el = document.getElementById("rows-per-page-sel");
+      const el = document.getElementById("rowsPerPageSel");
       return el ? parseInt(el.value, 10) : 10;
     },
 
@@ -152,8 +152,8 @@
           <td data-cy="cellSalary${pos}">${e(row.salary)}</td>
           <td data-cy="cellDepartment${pos}">${e(row.department)}</td>
           <td data-cy="cellActions${pos}">
-            <span id="edit-record-${pos}"   title="Edit"   class="action-icon" data-cy="editBtn${pos}"   data-id="${e(row.id)}">&#9998;</span>
-            <span id="delete-record-${pos}" title="Delete" class="action-icon" data-cy="deleteBtn${pos}" data-id="${e(row.id)}">&#10005;</span>
+            <span id="editRecord${pos}"   title="Edit"   class="action-icon" data-cy="editBtn${pos}"   data-id="${e(row.id)}">&#9998;</span>
+            <span id="deleteRecord${pos}" title="Delete" class="action-icon" data-cy="deleteBtn${pos}" data-id="${e(row.id)}">&#10005;</span>
           </td>
         </tr>`;
     },
@@ -163,7 +163,7 @@
       return `
         <div data-cy="registrationModal">
           <div class="modal-header">
-            <h5 id="registration-form-modal" data-cy="modalTitle">${e(title)}</h5>
+            <h5 id="registrationFormModal" data-cy="modalTitle">${e(title)}</h5>
           </div>
           <div class="modal-body">
             <div class="field-group"><label>First Name</label> <input id="firstName"  data-cy="modalFirstName"  type="text" value="${e(record.firstName || "")}" /></div>
@@ -182,7 +182,7 @@
 
     renderTable(filtered) {
       // All user data is escaped via esc() in rowHtml before assignment
-      document.getElementById("table-body").innerHTML = Pagination.slice(
+      document.getElementById("tableBody").innerHTML = Pagination.slice(
         // safe: all values run through esc()
         filtered,
       )
@@ -191,9 +191,9 @@
     },
 
     renderPagination(totalPages) {
-      document.getElementById("current-page-num").textContent =
+      document.getElementById("currentPageNum").textContent =
         Pagination.currentPage;
-      document.getElementById("total-pages-display").textContent = totalPages;
+      document.getElementById("totalPagesDisplay").textContent = totalPages;
       document.querySelector("[data-cy='prevPageBtn']").disabled =
         Pagination.currentPage <= 1;
       document.querySelector("[data-cy='nextPageBtn']").disabled =
@@ -214,11 +214,11 @@
     },
 
     _show(title, record) {
-      document.getElementById("wt-modal-overlay")?.remove();
+      document.getElementById("wtModalOverlay")?.remove();
 
       const overlay = document.createElement("div");
       overlay.className = "modal-overlay";
-      overlay.id = "wt-modal-overlay";
+      overlay.id = "wtModalOverlay";
       overlay.setAttribute("data-cy", "modalOverlay");
       overlay.innerHTML = Renderer.modalHtml(title, record);
 
@@ -233,7 +233,7 @@
     },
 
     close() {
-      document.getElementById("wt-modal-overlay")?.remove();
+      document.getElementById("wtModalOverlay")?.remove();
     },
 
     _submit() {
@@ -277,7 +277,7 @@
 
     _bindEvents() {
       // Event delegation for table actions — one listener instead of N listeners re-bound on every render
-      document.getElementById("table-body").addEventListener("click", (e) => {
+      document.getElementById("tableBody").addEventListener("click", (e) => {
         const icon = e.target.closest(".action-icon[data-id]");
         if (!icon) {
           return;
@@ -306,7 +306,7 @@
       // render() calls Pagination.getPageSize() which reads the select value
       // directly from the DOM, so the correct page size is always used.
       document
-        .getElementById("rows-per-page-sel")
+        .getElementById("rowsPerPageSel")
         .addEventListener("change", () => {
           Pagination.currentPage = 1;
           this.render();
