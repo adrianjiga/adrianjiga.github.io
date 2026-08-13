@@ -17,11 +17,11 @@ h1 {
   margin-bottom: 20px;
 }
 
-.form-group {
+.formGroup {
   margin-bottom: 16px;
 }
 
-label.field-label {
+label.fieldLabel {
   display: block;
   font-size: 13px;
   font-weight: 600;
@@ -49,17 +49,17 @@ textarea:focus {
 
 /* ── Gender radios ────────────────────────────────────────────────────────── */
 
-.gender-group {
+.genderGroup {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.gender-group input[type="radio"] {
+.genderGroup input[type="radio"] {
   display: none;
 }
 
-.gender-group label {
+.genderGroup label {
   padding: 6px 14px;
   border: 2px solid transparent;
   border-radius: 4px;
@@ -69,14 +69,14 @@ textarea:focus {
   transition: background 0.1s;
 }
 
-.gender-group input[type="radio"]:checked + label {
+.genderGroup input[type="radio"]:checked + label {
   background: #0366d6;
   color: #ffffff;
 }
 
 /* ── Date picker ──────────────────────────────────────────────────────────── */
 
-.date-picker-wrapper {
+.datePickerWrapper {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -100,13 +100,13 @@ textarea:focus {
   min-width: 260px;
 }
 
-.date-picker-header {
+.datePickerHeader {
   display: flex;
   gap: 8px;
   margin-bottom: 10px;
 }
 
-.date-picker-header select {
+.datePickerHeader select {
   padding: 4px 6px;
   border: 1px solid #ced4da;
   border-radius: 4px;
@@ -114,13 +114,13 @@ textarea:focus {
   cursor: pointer;
 }
 
-.date-picker-grid {
+.datePickerGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
 }
 
-.day-name {
+.dayName {
   text-align: center;
   font-size: 11px;
   font-weight: 600;
@@ -128,7 +128,7 @@ textarea:focus {
   padding: 4px 0;
 }
 
-.day-cell {
+.dayCell {
   text-align: center;
   padding: 5px 3px;
   font-size: 12px;
@@ -136,18 +136,18 @@ textarea:focus {
   border-radius: 4px;
 }
 
-.day-cell:hover {
+.dayCell:hover {
   background: #e3f0ff;
 }
 
-.day-cell--selected {
+.dayCellSelected {
   background: #0366d6;
   color: #ffffff;
 }
 
 /* ── Subjects autocomplete ────────────────────────────────────────────────── */
 
-.subjects-wrapper {
+.subjectsWrapper {
   border: 1px solid #ced4da;
   border-radius: 4px;
   padding: 4px 8px;
@@ -159,7 +159,7 @@ textarea:focus {
   min-height: 38px;
 }
 
-.subject-chip {
+.subjectChip {
   background: #e3f0ff;
   color: #0366d6;
   padding: 2px 8px;
@@ -170,7 +170,7 @@ textarea:focus {
   gap: 4px;
 }
 
-.subject-chip .remove {
+.subjectChip .remove {
   cursor: pointer;
   font-weight: bold;
 }
@@ -186,12 +186,12 @@ textarea:focus {
 
 /* ── Hobby checkboxes ─────────────────────────────────────────────────────── */
 
-.hobbies-group {
+.hobbiesGroup {
   display: flex;
   gap: 16px;
 }
 
-.hobby-item {
+.hobbyItem {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -201,7 +201,7 @@ textarea:focus {
 
 /* ── Custom select dropdowns ──────────────────────────────────────────────── */
 
-.select-dropdown {
+.selectDropdown {
   position: relative;
   border: 1px solid #ced4da;
   border-radius: 4px;
@@ -211,7 +211,7 @@ textarea:focus {
   user-select: none;
 }
 
-.select-control {
+.selectControl {
   display: flex;
   align-items: center;
   padding: 6px 10px;
@@ -219,22 +219,22 @@ textarea:focus {
   justify-content: space-between;
 }
 
-.select-value {
+.selectValue {
   font-size: 14px;
   color: #333333;
 }
 
-.select-placeholder {
+.selectPlaceholder {
   font-size: 14px;
   color: #999999;
 }
 
-.select-arrow {
+.selectArrow {
   font-size: 10px;
   color: #999999;
 }
 
-.select-menu {
+.selectMenu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -247,13 +247,13 @@ textarea:focus {
   box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
 }
 
-.select-option {
+.selectOption {
   padding: 8px 12px;
   font-size: 14px;
   cursor: pointer;
 }
 
-.select-option:hover {
+.selectOption:hover {
   background: #e3f0ff;
 }
 
@@ -276,7 +276,7 @@ textarea:focus {
 
 /* ── Success modal ────────────────────────────────────────────────────────── */
 
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   inset: 0;
   background: rgb(0, 0, 0, 0.5);
@@ -286,14 +286,14 @@ textarea:focus {
   z-index: 1000;
 }
 
-.modal-dialog {
+.modalDialog {
   background: #ffffff;
   border-radius: 6px;
   min-width: 500px;
   max-width: 90vw;
 }
 
-.modal-header {
+.modalHeader {
   padding: 16px 20px;
   border-bottom: 1px solid #dee2e6;
   display: flex;
@@ -301,16 +301,16 @@ textarea:focus {
   justify-content: space-between;
 }
 
-.modal-header h2 {
+.modalHeader h2 {
   margin: 0;
   font-size: 1.1rem;
 }
 
-.modal-body {
+.modalBody {
   padding: 16px 20px;
 }
 
-.modal-footer {
+.modalFooter {
   padding: 12px 20px;
   border-top: 1px solid #dee2e6;
   text-align: right;
@@ -341,7 +341,7 @@ table tr:nth-child(even) td {
   background: #f8f9fa;
 }
 
-.two-col {
+.twoCol {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;

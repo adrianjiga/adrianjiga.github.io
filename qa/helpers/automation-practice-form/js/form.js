@@ -121,7 +121,7 @@
       for (let d = 1; d <= daysInMonth; d++) {
         const padded = String(d).padStart(2, "0");
         const cell = document.createElement("div");
-        cell.className = "day-cell";
+        cell.className = "dayCell";
         cell.textContent = d;
         cell.dataset.day = padded;
         cell.dataset.month = month;
@@ -173,7 +173,7 @@
       container.innerHTML = "";
       FormState.subjects.forEach((s, i) => {
         const chip = document.createElement("span");
-        chip.className = "subject-chip";
+        chip.className = "subjectChip";
         chip.setAttribute("data-cy", `subjectChip${i}`);
         chip.innerHTML = `${esc(s)} <span class="remove" data-cy="removeSubject${i}" data-index="${i}">&#215;</span>`;
         chip.querySelector(".remove").addEventListener("click", (ev) => {
@@ -229,18 +229,18 @@
 
       const stateDisp = document.getElementById("stateDisplay");
       stateDisp.textContent = name;
-      stateDisp.className = "select-value";
+      stateDisp.className = "selectValue";
       document.getElementById("stateMenu").style.display = "none";
 
       const cityDisp = document.getElementById("cityDisplay");
       cityDisp.textContent = "Select City";
-      cityDisp.className = "select-placeholder";
+      cityDisp.className = "selectPlaceholder";
 
       const cityMenu = document.getElementById("cityMenu");
       cityMenu.innerHTML = "";
       (COUNTRY_CITIES[name] || []).forEach((city) => {
         const opt = document.createElement("div");
-        opt.className = "select-option";
+        opt.className = "selectOption";
         // "The Hague" -> cityOptionTheHague. Cities arrive capitalised already, so the only
         // work is removing the spaces; lower-casing would flatten the camel humps.
         opt.setAttribute("data-cy", `cityOption${city.replace(/\s+/g, "")}`);
@@ -249,7 +249,7 @@
           e.stopPropagation();
           FormState.selectedCity = city;
           cityDisp.textContent = city;
-          cityDisp.className = "select-value";
+          cityDisp.className = "selectValue";
           cityMenu.style.display = "none";
         });
         cityMenu.appendChild(opt);

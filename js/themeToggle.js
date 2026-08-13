@@ -71,7 +71,7 @@ export function initThemeToggle() {
     applyTheme(stored || getPreferredTheme());
 
     // Find and setup toggle button
-    toggleButton = document.querySelector(".theme-toggle");
+    toggleButton = document.querySelector(".themeToggle");
 
     if (!toggleButton) {
       console.warn("Theme toggle button not found");

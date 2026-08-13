@@ -15,7 +15,7 @@ let scrollIndicator = null;
  */
 export function initScrollIndicator() {
   try {
-    scrollIndicator = document.querySelector(".scroll-indicator");
+    scrollIndicator = document.querySelector(".scrollIndicator");
 
     if (!scrollIndicator) {
       console.warn("Scroll indicator element not found");
@@ -64,15 +64,15 @@ export function initCardReveal() {
     cardObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.remove("card--reveal-pending");
-          entry.target.classList.add("card--revealed");
+          entry.target.classList.remove("cardRevealPending");
+          entry.target.classList.add("cardRevealed");
         }
       });
     }, observerOptions);
 
     // Setup initial state and observe each card
     cards.forEach((card) => {
-      card.classList.add("card--reveal-pending");
+      card.classList.add("cardRevealPending");
       cardObserver?.observe(card);
     });
   } catch (error) {

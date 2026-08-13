@@ -87,7 +87,7 @@ body {
 }
 
 /* Skip to content link for accessibility */
-.skip-link {
+.skipLink {
   position: absolute;
   top: -40px;
   left: 0;
@@ -100,6 +100,6 @@ body {
   transition: top 0.3s;
 }
 
-.skip-link:focus {
+.skipLink:focus {
   top: 0;
 }

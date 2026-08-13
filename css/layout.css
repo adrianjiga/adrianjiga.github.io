@@ -77,7 +77,7 @@ nav a:hover::after {
 }
 
 /* Theme Toggle Button */
-.theme-toggle {
+.themeToggle {
   background: none;
   border: 2px solid var(--border-color);
   color: var(--text-primary);
@@ -92,40 +92,40 @@ nav a:hover::after {
   transition: all 0.3s;
 }
 
-.theme-toggle:hover {
+.themeToggle:hover {
   background: var(--acid);
   border-color: var(--acid);
   color: var(--acid-text);
 }
 
-.theme-toggle svg {
+.themeToggle svg {
   width: 20px;
   height: 20px;
 }
 
-.theme-toggle .sun-icon {
+.themeToggle .sunIcon {
   display: none;
 }
 
-.theme-toggle .moon-icon {
+.themeToggle .moonIcon {
   display: block;
 }
 
-[data-theme="dark"] .theme-toggle .sun-icon,
-:root:not([data-theme]) .theme-toggle .sun-icon {
+[data-theme="dark"] .themeToggle .sunIcon,
+:root:not([data-theme]) .themeToggle .sunIcon {
   display: block;
 }
 
-[data-theme="dark"] .theme-toggle .moon-icon,
-:root:not([data-theme]) .theme-toggle .moon-icon {
+[data-theme="dark"] .themeToggle .moonIcon,
+:root:not([data-theme]) .themeToggle .moonIcon {
   display: none;
 }
 
-[data-theme="light"] .theme-toggle .sun-icon {
+[data-theme="light"] .themeToggle .sunIcon {
   display: none;
 }
 
-[data-theme="light"] .theme-toggle .moon-icon {
+[data-theme="light"] .themeToggle .moonIcon {
   display: block;
 }
 
@@ -135,7 +135,7 @@ section {
   border-top: 2px solid var(--border-color);
 }
 
-.section-title {
+.sectionTitle {
   font-family: "Bebas Neue", sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   letter-spacing: 3px;
@@ -144,7 +144,7 @@ section {
   text-align: center;
 }
 
-.section-subtitle {
+.sectionSubtitle {
   font-size: 1rem;
   opacity: 0.6;
   margin-bottom: 3rem;
@@ -165,19 +165,19 @@ footer {
 
 
 /* About Section - Two Column */
-.about-grid {
+.aboutGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
 }
 
-.about-text {
+.aboutText {
   font-size: 1.1rem;
   line-height: 1.8;
   opacity: 0.9;
 }
 
-.about-text p {
+.aboutText p {
   margin-bottom: 1.5rem;
 }
 

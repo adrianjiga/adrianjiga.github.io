@@ -55,7 +55,7 @@ h1 {
 
 /* ── Table ────────────────────────────────────────────────────────────────── */
 
-.table-wrapper {
+.tableWrapper {
   background: #ffffff;
   border: 1px solid #dee2e6;
   border-radius: 6px;
@@ -94,7 +94,7 @@ tbody tr:nth-child(even) td {
 
 /* ── Action icons ─────────────────────────────────────────────────────────── */
 
-.action-icon {
+.actionIcon {
   display: inline-block;
   cursor: pointer;
   padding: 3px 6px;
@@ -105,13 +105,13 @@ tbody tr:nth-child(even) td {
   border: none;
 }
 
-.action-icon:hover {
+.actionIcon:hover {
   background: #e9ecef;
 }
 
 /* ── Pagination ───────────────────────────────────────────────────────────── */
 
-.pagination-bar {
+.paginationBar {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -122,7 +122,7 @@ tbody tr:nth-child(even) td {
   flex-wrap: wrap;
 }
 
-.pagination-btn {
+.paginationBtn {
   padding: 5px 14px;
   border: 1px solid #ced4da;
   border-radius: 4px;
@@ -131,29 +131,29 @@ tbody tr:nth-child(even) td {
   cursor: pointer;
 }
 
-.pagination-btn:disabled {
+.paginationBtn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-.pagination-btn:not(:disabled):hover {
+.paginationBtn:not(:disabled):hover {
   background: #e9ecef;
 }
 
-.page-info {
+.pageInfo {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.rows-per-page {
+.rowsPerPage {
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.rows-per-page label {
+.rowsPerPage label {
   font-size: 13px;
   color: #666666;
 }
@@ -168,7 +168,7 @@ select[aria-label="rows per page"] {
 
 /* ── Modal ────────────────────────────────────────────────────────────────── */
 
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   inset: 0;
   background: rgb(0, 0, 0, 0.5);
@@ -185,32 +185,32 @@ select[aria-label="rows per page"] {
   max-width: 90vw;
 }
 
-.modal-header {
+.modalHeader {
   padding: 14px 20px;
   border-bottom: 1px solid #dee2e6;
 }
 
-.modal-header h5 {
+.modalHeader h5 {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
 }
 
-.modal-body {
+.modalBody {
   padding: 16px 20px;
 }
 
-.modal-footer {
+.modalFooter {
   padding: 12px 20px;
   border-top: 1px solid #dee2e6;
   text-align: right;
 }
 
-.field-group {
+.fieldGroup {
   margin-bottom: 14px;
 }
 
-.field-group label {
+.fieldGroup label {
   display: block;
   font-size: 12px;
   font-weight: 600;
@@ -218,7 +218,7 @@ select[aria-label="rows per page"] {
   margin-bottom: 4px;
 }
 
-.field-group input {
+.fieldGroup input {
   width: 100%;
   padding: 7px 10px;
   border: 1px solid #ced4da;
@@ -227,7 +227,7 @@ select[aria-label="rows per page"] {
   outline: none;
 }
 
-.field-group input:focus {
+.fieldGroup input:focus {
   border-color: #80bdff;
 }
 
@@ -245,7 +245,7 @@ select[aria-label="rows per page"] {
   background: #025bb5;
 }
 
-.btn-cancel {
+.btnCancel {
   padding: 7px 16px;
   background: #6c757d;
   color: #ffffff;
