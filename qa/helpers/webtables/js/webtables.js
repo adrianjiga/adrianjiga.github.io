@@ -104,7 +104,7 @@
   // getPageSize() reads the select value from the DOM on every call.
   // This means render() always uses the value currently visible in the UI,
   // regardless of whether a change event fired correctly — fixing the
-  // rows-per-page bug where stale module-level state caused wrong slice sizes.
+  // rowsPerPage bug where stale module-level state caused wrong slice sizes.
 
   const Pagination = {
     currentPage: 1,
@@ -152,8 +152,8 @@
           <td data-cy="cellSalary${pos}">${e(row.salary)}</td>
           <td data-cy="cellDepartment${pos}">${e(row.department)}</td>
           <td data-cy="cellActions${pos}">
-            <span id="editRecord${pos}"   title="Edit"   class="action-icon" data-cy="editBtn${pos}"   data-id="${e(row.id)}">&#9998;</span>
-            <span id="deleteRecord${pos}" title="Delete" class="action-icon" data-cy="deleteBtn${pos}" data-id="${e(row.id)}">&#10005;</span>
+            <span id="editRecord${pos}"   title="Edit"   class="actionIcon" data-cy="editBtn${pos}"   data-id="${e(row.id)}">&#9998;</span>
+            <span id="deleteRecord${pos}" title="Delete" class="actionIcon" data-cy="deleteBtn${pos}" data-id="${e(row.id)}">&#10005;</span>
           </td>
         </tr>`;
     },
@@ -162,19 +162,19 @@
       const e = (v) => this.esc(v);
       return `
         <div data-cy="registrationModal">
-          <div class="modal-header">
+          <div class="modalHeader">
             <h5 id="registrationFormModal" data-cy="modalTitle">${e(title)}</h5>
           </div>
-          <div class="modal-body">
-            <div class="field-group"><label>First Name</label> <input id="firstName"  data-cy="modalFirstName"  type="text" value="${e(record.firstName || "")}" /></div>
-            <div class="field-group"><label>Last Name</label>  <input id="lastName"   data-cy="modalLastName"   type="text" value="${e(record.lastName || "")}" /></div>
-            <div class="field-group"><label>Email</label>      <input id="userEmail"  data-cy="modalEmail"       type="text" value="${e(record.email || "")}" /></div>
-            <div class="field-group"><label>Age</label>        <input id="age"        data-cy="modalAge"         type="text" value="${e(record.age || "")}" /></div>
-            <div class="field-group"><label>Salary</label>     <input id="salary"     data-cy="modalSalary"      type="text" value="${e(record.salary || "")}" /></div>
-            <div class="field-group"><label>Department</label> <input id="department" data-cy="modalDepartment"  type="text" value="${e(record.department || "")}" /></div>
+          <div class="modalBody">
+            <div class="fieldGroup"><label>First Name</label> <input id="firstName"  data-cy="modalFirstName"  type="text" value="${e(record.firstName || "")}" /></div>
+            <div class="fieldGroup"><label>Last Name</label>  <input id="lastName"   data-cy="modalLastName"   type="text" value="${e(record.lastName || "")}" /></div>
+            <div class="fieldGroup"><label>Email</label>      <input id="userEmail"  data-cy="modalEmail"       type="text" value="${e(record.email || "")}" /></div>
+            <div class="fieldGroup"><label>Age</label>        <input id="age"        data-cy="modalAge"         type="text" value="${e(record.age || "")}" /></div>
+            <div class="fieldGroup"><label>Salary</label>     <input id="salary"     data-cy="modalSalary"      type="text" value="${e(record.salary || "")}" /></div>
+            <div class="fieldGroup"><label>Department</label> <input id="department" data-cy="modalDepartment"  type="text" value="${e(record.department || "")}" /></div>
           </div>
-          <div class="modal-footer">
-            <button class="btn-cancel" data-cy="modalCancelBtn">Close</button>
+          <div class="modalFooter">
+            <button class="btnCancel" data-cy="modalCancelBtn">Close</button>
             <button id="submit"        data-cy="modalSubmitBtn">Submit</button>
           </div>
         </div>`;
@@ -217,7 +217,7 @@
       document.getElementById("wtModalOverlay")?.remove();
 
       const overlay = document.createElement("div");
-      overlay.className = "modal-overlay";
+      overlay.className = "modalOverlay";
       overlay.id = "wtModalOverlay";
       overlay.setAttribute("data-cy", "modalOverlay");
       overlay.innerHTML = Renderer.modalHtml(title, record);
@@ -278,7 +278,7 @@
     _bindEvents() {
       // Event delegation for table actions — one listener instead of N listeners re-bound on every render
       document.getElementById("tableBody").addEventListener("click", (e) => {
-        const icon = e.target.closest(".action-icon[data-id]");
+        const icon = e.target.closest(".actionIcon[data-id]");
         if (!icon) {
           return;
         }

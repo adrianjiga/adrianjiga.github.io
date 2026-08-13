@@ -5,7 +5,7 @@
   }
 
   100% {
-    transform: translate(var(--grid-size), var(--grid-size));
+    transform: translate(var(--gridSize), var(--gridSize));
   }
 }
 

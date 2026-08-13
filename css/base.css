@@ -14,80 +14,80 @@ html {
   /* Base palette */
   --black: #0a0a0a;
   --white: #fafafa;
-  --grid-size: 40px;
+  --gridSize: 40px;
 
   /* Dark theme accent colors (bright, for dark backgrounds) */
-  --acid-dark: #d4ff00;
-  --red-dark: #ff3366;
-  --blue-dark: #00d9ff;
+  --acidDark: #d4ff00;
+  --redDark: #ff3366;
+  --blueDark: #00d9ff;
 
   /* Light theme accent colors (darker, for light backgrounds) */
-  --acid-light: #4a7c00;
-  --red-light: #c41e3a;
-  --blue-light: #0077a8;
+  --acidLight: #4a7c00;
+  --redLight: #c41e3a;
+  --blueLight: #0077a8;
 
   /* Default to dark theme */
-  --bg-primary: var(--black);
-  --text-primary: var(--white);
-  --text-secondary: rgb(250, 250, 250, 0.8);
-  --border-color: var(--white);
-  --border-subtle: rgb(255, 255, 255, 0.1);
-  --acid: var(--acid-dark);
-  --red: var(--red-dark);
-  --blue: var(--blue-dark);
-  --acid-text: var(--black); /* text on acid-colored backgrounds */
+  --bgPrimary: var(--black);
+  --textPrimary: var(--white);
+  --textSecondary: rgb(250, 250, 250, 0.8);
+  --borderColor: var(--white);
+  --borderSubtle: rgb(255, 255, 255, 0.1);
+  --acid: var(--acidDark);
+  --red: var(--redDark);
+  --blue: var(--blueDark);
+  --acidText: var(--black); /* text on acid-colored backgrounds */
 }
 
 /* Light mode - respects system preference */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --bg-primary: var(--white);
-    --text-primary: var(--black);
-    --text-secondary: rgb(10, 10, 10, 0.75);
-    --border-color: #2a2a2a;
-    --border-subtle: rgb(0, 0, 0, 0.15);
-    --acid: var(--acid-light);
-    --red: var(--red-light);
-    --blue: var(--blue-light);
-    --acid-text: var(--white);
+    --bgPrimary: var(--white);
+    --textPrimary: var(--black);
+    --textSecondary: rgb(10, 10, 10, 0.75);
+    --borderColor: #2a2a2a;
+    --borderSubtle: rgb(0, 0, 0, 0.15);
+    --acid: var(--acidLight);
+    --red: var(--redLight);
+    --blue: var(--blueLight);
+    --acidText: var(--white);
   }
 }
 
 /* Manual dark theme override */
 [data-theme="dark"] {
-  --bg-primary: var(--black);
-  --text-primary: var(--white);
-  --text-secondary: rgb(250, 250, 250, 0.8);
-  --border-color: var(--white);
-  --border-subtle: rgb(255, 255, 255, 0.1);
-  --acid: var(--acid-dark);
-  --red: var(--red-dark);
-  --blue: var(--blue-dark);
+  --bgPrimary: var(--black);
+  --textPrimary: var(--white);
+  --textSecondary: rgb(250, 250, 250, 0.8);
+  --borderColor: var(--white);
+  --borderSubtle: rgb(255, 255, 255, 0.1);
+  --acid: var(--acidDark);
+  --red: var(--redDark);
+  --blue: var(--blueDark);
 }
 
 /* Manual light theme override */
 [data-theme="light"] {
-  --bg-primary: var(--white);
-  --text-primary: var(--black);
-  --text-secondary: rgb(10, 10, 10, 0.75);
-  --border-color: #2a2a2a;
-  --border-subtle: rgb(0, 0, 0, 0.15);
-  --acid: var(--acid-light);
-  --red: var(--red-light);
-  --blue: var(--blue-light);
-  --acid-text: var(--white);
+  --bgPrimary: var(--white);
+  --textPrimary: var(--black);
+  --textSecondary: rgb(10, 10, 10, 0.75);
+  --borderColor: #2a2a2a;
+  --borderSubtle: rgb(0, 0, 0, 0.15);
+  --acid: var(--acidLight);
+  --red: var(--redLight);
+  --blue: var(--blueLight);
+  --acidText: var(--white);
 }
 
 body {
   font-family: "IBM Plex Mono", monospace;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--bgPrimary);
+  color: var(--textPrimary);
   overflow-x: hidden;
   cursor: default;
 }
 
 /* Skip to content link for accessibility */
-.skip-link {
+.skipLink {
   position: absolute;
   top: -40px;
   left: 0;
@@ -100,6 +100,6 @@ body {
   transition: top 0.3s;
 }
 
-.skip-link:focus {
+.skipLink:focus {
   top: 0;
 }

@@ -15,31 +15,31 @@
   display: inline-block;
 }
 
-.btn-primary {
+.btnPrimary {
   background: var(--acid);
-  color: var(--acid-text);
+  color: var(--acidText);
   border-color: var(--acid);
 }
 
-.btn-primary:hover {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  color: var(--bg-primary);
+.btnPrimary:hover {
+  background: var(--textPrimary);
+  border-color: var(--textPrimary);
+  color: var(--bgPrimary);
 }
 
-.btn-secondary {
+.btnSecondary {
   background: transparent;
-  color: var(--text-primary);
-  border-color: var(--border-color);
+  color: var(--textPrimary);
+  border-color: var(--borderColor);
 }
 
-.btn-secondary:hover {
-  background: var(--text-primary);
-  color: var(--bg-primary);
+.btnSecondary:hover {
+  background: var(--textPrimary);
+  color: var(--bgPrimary);
 }
 
 /* Cards */
-.cards-grid {
+.cardsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
@@ -47,7 +47,7 @@
 
 .card {
   padding: 1.5rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--borderColor);
   position: relative;
   transition: all 0.3s;
   display: flex;
@@ -75,32 +75,32 @@
   width: 100%;
 }
 
-.card-content {
+.cardContent {
   position: relative;
   z-index: 1;
 }
 
 
-.card-title {
+.cardTitle {
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
-  color: var(--text-primary);
+  color: var(--textPrimary);
 }
 
-.card-title::before {
+.cardTitle::before {
   content: "// ";
   color: var(--acid);
 }
 
-.card-description {
+.cardDescription {
   font-size: 0.85rem;
   line-height: 1.6;
   opacity: 0.8;
 }
 
 /* Card scroll-reveal animation states (toggled by scroll-effects.js) */
-.card--reveal-pending {
+.cardRevealPending {
   opacity: 0;
   transform: translateY(50px);
   transition:
@@ -108,13 +108,13 @@
     transform 0.6s ease;
 }
 
-.card--revealed {
+.cardRevealed {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Button modifier: adds top spacing for buttons inside card content */
-.btn--cta {
+.btnCta {
   margin-top: 1.5rem;
   display: inline-block;
 }
@@ -126,13 +126,13 @@
   gap: 0;
   margin-top: 6rem;
   margin-bottom: 3rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--borderColor);
   animation: fadeIn 1s ease-out 1.2s both;
 }
 
 .stat {
   padding: 2rem;
-  border-right: 2px solid var(--border-color);
+  border-right: 2px solid var(--borderColor);
   position: relative;
   overflow: hidden;
 }
@@ -157,7 +157,7 @@
   left: 100%;
 }
 
-.stat-number {
+.statNumber {
   font-family: "Bebas Neue", sans-serif;
   font-size: 3rem;
   color: var(--acid);
@@ -165,7 +165,7 @@
   margin-bottom: 0.5rem;
 }
 
-.stat-label {
+.statLabel {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -177,7 +177,7 @@
   padding-bottom: 4rem;
 }
 
-.contact-links {
+.contactLinks {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;

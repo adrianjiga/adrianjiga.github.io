@@ -20,7 +20,7 @@
     <button id="addNewRecordButton" data-cy="addRecordBtn">+ Add</button>
   </div>
 
-  <div class="table-wrapper" data-cy="tableWrapper">
+  <div class="tableWrapper" data-cy="tableWrapper">
     <table data-cy="table">
       <thead data-cy="tableHeader">
         <tr>
@@ -37,16 +37,16 @@
     </table>
   </div>
 
-  <div class="pagination-bar" data-cy="pagination">
-    <button class="pagination-btn -previous" data-cy="prevPageBtn">Previous</button>
-    <div class="page-info" data-cy="pageInfo">
+  <div class="paginationBar" data-cy="pagination">
+    <button class="paginationBtn" data-cy="prevPageBtn">Previous</button>
+    <div class="pageInfo" data-cy="pageInfo">
       <span>Page</span>
       <strong id="currentPageNum" data-cy="currentPage">1</strong>
       <span>of</span>
       <span id="totalPagesDisplay" data-cy="totalPages">1</span>
     </div>
-    <button class="pagination-btn -next" data-cy="nextPageBtn">Next</button>
-    <div class="rows-per-page">
+    <button class="paginationBtn" data-cy="nextPageBtn">Next</button>
+    <div class="rowsPerPage">
       <label for="rowsPerPageSel">Rows per page:</label>
       <select
         id="rowsPerPageSel"

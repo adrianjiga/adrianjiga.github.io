@@ -19,7 +19,7 @@ export function initCursorTrail() {
     // Create trail elements
     for (let i = 0; i < MAX_TRAILS; i++) {
       const trail = document.createElement("div");
-      trail.className = "cursor-trail";
+      trail.className = "cursorTrail";
       document.body.appendChild(trail);
       trails.push({
         element: trail,
