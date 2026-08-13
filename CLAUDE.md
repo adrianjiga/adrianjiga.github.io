@@ -85,5 +85,14 @@ Two things stay kebab-case, both because something external requires it:
 
 - `npm run dev` / `npm run build` / `npm run preview` work locally.
 - GitHub Pages deployment is handled by Jekyll (`jekyllGhPages.yml`). Jekyll serves the raw source files; `dist/` is gitignored and never deployed.
+- **Directory URLs work without a trailing slash**, matching GitHub Pages. Pages answers `/qa`
+  with a 301 to `/qa/`; Vite does not, because only `index.html` is in the build input and the
+  default `appType: "spa"` rewrites any extensionless miss to `/index.html` — so `/qa` used to
+  serve the portfolio homepage with a 200, which is worse than a 404. The
+  `pagesStyleDirectoryRedirects` plugin in `vite.config.js` issues the same 301 in dev. It only
+  fires when the directory actually contains an `index.html`.
+- The SPA fallback is otherwise untouched, so a genuine miss like `/doesNotExist` still returns
+  the homepage with a 200 rather than a 404. Setting `appType: "mpa"` would make those 404
+  properly, at the cost of changing behaviour for every unmatched path.
 - Do **not** add a Vite build step to the CI workflow unless you intentionally migrate away from Jekyll.
 - If you're unsure which output to look at: the deployed site is built by Jekyll from `/`, not from `dist/`.
