@@ -61,10 +61,10 @@
       this._initYears();
 
       document
-        .getElementById("dp-month")
+        .getElementById("dpMonth")
         .addEventListener("change", () => this._renderDays());
       document
-        .getElementById("dp-year")
+        .getElementById("dpYear")
         .addEventListener("change", () => this._renderDays());
 
       document
@@ -91,7 +91,7 @@
     },
 
     _initYears() {
-      const sel = document.getElementById("dp-year");
+      const sel = document.getElementById("dpYear");
       const cur = new Date().getFullYear();
       for (let y = 1900; y <= cur + 20; y++) {
         const opt = document.createElement("option");
@@ -104,10 +104,10 @@
     },
 
     _renderDays() {
-      const month = parseInt(document.getElementById("dp-month").value, 10);
-      const year = parseInt(document.getElementById("dp-year").value, 10);
+      const month = parseInt(document.getElementById("dpMonth").value, 10);
+      const year = parseInt(document.getElementById("dpYear").value, 10);
       const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const grid = document.getElementById("dp-days-grid");
+      const grid = document.getElementById("dpDaysGrid");
 
       while (grid.children.length > 7) {
         grid.removeChild(grid.lastChild);
@@ -169,7 +169,7 @@
     },
 
     _render() {
-      const container = document.getElementById("subjects-chips");
+      const container = document.getElementById("subjectsChips");
       container.innerHTML = "";
       FormState.subjects.forEach((s, i) => {
         const chip = document.createElement("span");
@@ -192,9 +192,9 @@
     init() {
       document.getElementById("state").addEventListener("click", (e) => {
         e.stopPropagation();
-        const menu = document.getElementById("state-menu");
+        const menu = document.getElementById("stateMenu");
         menu.style.display = menu.style.display === "none" ? "block" : "none";
-        document.getElementById("city-menu").style.display = "none";
+        document.getElementById("cityMenu").style.display = "none";
       });
 
       document.querySelectorAll("[data-state-idx]").forEach((el) => {
@@ -212,31 +212,31 @@
         if (!FormState.selectedCountry) {
           return;
         }
-        const menu = document.getElementById("city-menu");
+        const menu = document.getElementById("cityMenu");
         menu.style.display = menu.style.display === "none" ? "block" : "none";
-        document.getElementById("state-menu").style.display = "none";
+        document.getElementById("stateMenu").style.display = "none";
       });
     },
 
     closeAll() {
-      document.getElementById("state-menu").style.display = "none";
-      document.getElementById("city-menu").style.display = "none";
+      document.getElementById("stateMenu").style.display = "none";
+      document.getElementById("cityMenu").style.display = "none";
     },
 
     _selectCountry(idx, name) {
       FormState.selectedCountry = name;
       FormState.selectedCity = "";
 
-      const stateDisp = document.getElementById("state-display");
+      const stateDisp = document.getElementById("stateDisplay");
       stateDisp.textContent = name;
       stateDisp.className = "select-value";
-      document.getElementById("state-menu").style.display = "none";
+      document.getElementById("stateMenu").style.display = "none";
 
-      const cityDisp = document.getElementById("city-display");
+      const cityDisp = document.getElementById("cityDisplay");
       cityDisp.textContent = "Select City";
       cityDisp.className = "select-placeholder";
 
-      const cityMenu = document.getElementById("city-menu");
+      const cityMenu = document.getElementById("cityMenu");
       cityMenu.innerHTML = "";
       (COUNTRY_CITIES[name] || []).forEach((city) => {
         const opt = document.createElement("div");
@@ -278,7 +278,7 @@
 
       const checked = document.querySelector('input[name="gender"]:checked');
       for (let i = 1; i <= 3; i++) {
-        const lbl = document.querySelector(`label[for="gender-radio-${i}"]`);
+        const lbl = document.querySelector(`label[for="genderRadio${i}"]`);
         if (!checked) {
           this._markError(lbl);
           valid = false;
@@ -317,17 +317,17 @@
 
   const SuccessModal = {
     show(rows) {
-      document.getElementById("result-tbody").innerHTML = rows
+      document.getElementById("resultTbody").innerHTML = rows
         .map(
           (r, i) =>
             `<tr data-cy="resultRow${i}"><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`,
         )
         .join("");
-      document.getElementById("success-modal").style.display = "flex";
+      document.getElementById("successModal").style.display = "flex";
     },
 
     close() {
-      document.getElementById("success-modal").style.display = "none";
+      document.getElementById("successModal").style.display = "none";
     },
   };
 
@@ -368,13 +368,13 @@
 
       const gender = document.querySelector('input[name="gender"]:checked');
       const hobbies = [];
-      if (document.getElementById("hobbies-checkbox-1").checked) {
+      if (document.getElementById("hobbiesCheckbox1").checked) {
         hobbies.push("Sports");
       }
-      if (document.getElementById("hobbies-checkbox-2").checked) {
+      if (document.getElementById("hobbiesCheckbox2").checked) {
         hobbies.push("Reading");
       }
-      if (document.getElementById("hobbies-checkbox-3").checked) {
+      if (document.getElementById("hobbiesCheckbox3").checked) {
         hobbies.push("Music");
       }
 

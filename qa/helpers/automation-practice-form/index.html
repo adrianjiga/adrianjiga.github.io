@@ -30,12 +30,12 @@
     <div class="form-group">
       <label class="field-label">Gender</label>
       <div class="gender-group" data-cy="genderGroup">
-        <input type="radio" id="gender-radio-1" name="gender" value="Male"   data-cy="genderMale"   />
-        <label for="gender-radio-1" data-cy="genderMaleLabel">Male</label>
-        <input type="radio" id="gender-radio-2" name="gender" value="Female" data-cy="genderFemale" />
-        <label for="gender-radio-2" data-cy="genderFemaleLabel">Female</label>
-        <input type="radio" id="gender-radio-3" name="gender" value="Other"  data-cy="genderOther"  />
-        <label for="gender-radio-3" data-cy="genderOtherLabel">Other</label>
+        <input type="radio" id="genderRadio1" name="gender" value="Male"   data-cy="genderMale"   />
+        <label for="genderRadio1" data-cy="genderMaleLabel">Male</label>
+        <input type="radio" id="genderRadio2" name="gender" value="Female" data-cy="genderFemale" />
+        <label for="genderRadio2" data-cy="genderFemaleLabel">Female</label>
+        <input type="radio" id="genderRadio3" name="gender" value="Other"  data-cy="genderOther"  />
+        <label for="genderRadio3" data-cy="genderOtherLabel">Other</label>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
         />
         <div id="datepickerPopup" data-cy="datepickerPopup" style="display:none;">
           <div class="date-picker-header">
-            <select id="dp-month" data-cy="monthSelect" aria-label="Month">
+            <select id="dpMonth" data-cy="monthSelect" aria-label="Month">
               <option value="0">January</option>
               <option value="1">February</option>
               <option value="2">March</option>
@@ -70,11 +70,11 @@
               <option value="10">November</option>
               <option value="11">December</option>
             </select>
-            <select id="dp-year" data-cy="yearSelect" aria-label="Year">
+            <select id="dpYear" data-cy="yearSelect" aria-label="Year">
               <!-- populated by DatePicker.init() -->
             </select>
           </div>
-          <div class="date-picker-grid" id="dp-days-grid" data-cy="daysGrid">
+          <div class="date-picker-grid" id="dpDaysGrid" data-cy="daysGrid">
             <div class="day-name">Su</div>
             <div class="day-name">Mo</div>
             <div class="day-name">Tu</div>
@@ -91,7 +91,7 @@
     <div class="form-group">
       <label class="field-label" for="subjectsInput">Subjects</label>
       <div class="subjects-wrapper" data-cy="subjectsWrapper">
-        <div id="subjects-chips" data-cy="subjectsChips"></div>
+        <div id="subjectsChips" data-cy="subjectsChips"></div>
         <input
           type="text"
           id="subjectsInput"
@@ -106,13 +106,13 @@
       <label class="field-label">Hobbies</label>
       <div class="hobbies-group" data-cy="hobbiesGroup">
         <label class="hobby-item" data-cy="hobbySportsLabel">
-          <input type="checkbox" id="hobbies-checkbox-1" data-cy="hobbySports"  value="Sports"  /> Sports
+          <input type="checkbox" id="hobbiesCheckbox1" data-cy="hobbySports"  value="Sports"  /> Sports
         </label>
         <label class="hobby-item" data-cy="hobbyReadingLabel">
-          <input type="checkbox" id="hobbies-checkbox-2" data-cy="hobbyReading" value="Reading" /> Reading
+          <input type="checkbox" id="hobbiesCheckbox2" data-cy="hobbyReading" value="Reading" /> Reading
         </label>
         <label class="hobby-item" data-cy="hobbyMusicLabel">
-          <input type="checkbox" id="hobbies-checkbox-3" data-cy="hobbyMusic"   value="Music"   /> Music
+          <input type="checkbox" id="hobbiesCheckbox3" data-cy="hobbyMusic"   value="Music"   /> Music
         </label>
       </div>
     </div>
@@ -132,10 +132,10 @@
         <label class="field-label">Country</label>
         <div id="state" class="select-dropdown" data-cy="stateDropdown">
           <div class="select-control" data-cy="stateControl">
-            <span id="state-display" data-cy="stateDisplay" class="select-placeholder">Select Country</span>
+            <span id="stateDisplay" data-cy="stateDisplay" class="select-placeholder">Select Country</span>
             <span class="select-arrow">&#9660;</span>
           </div>
-          <div class="select-menu" id="state-menu" data-cy="stateMenu" style="display:none;">
+          <div class="select-menu" id="stateMenu" data-cy="stateMenu" style="display:none;">
             <div class="select-option" data-cy="stateOptionGermany"     data-state-idx="0">Germany</div>
             <div class="select-option" data-cy="stateOptionFrance"      data-state-idx="1">France</div>
             <div class="select-option" data-cy="stateOptionSpain"       data-state-idx="2">Spain</div>
@@ -149,10 +149,10 @@
         <label class="field-label">City</label>
         <div id="city" class="select-dropdown" data-cy="cityDropdown">
           <div class="select-control" data-cy="cityControl">
-            <span id="city-display" data-cy="cityDisplay" class="select-placeholder">Select City</span>
+            <span id="cityDisplay" data-cy="cityDisplay" class="select-placeholder">Select City</span>
             <span class="select-arrow">&#9660;</span>
           </div>
-          <div class="select-menu" id="city-menu" data-cy="cityMenu" style="display:none;"></div>
+          <div class="select-menu" id="cityMenu" data-cy="cityMenu" style="display:none;"></div>
         </div>
       </div>
     </div>
@@ -161,7 +161,7 @@
   </form>
 
   <!-- Success modal -->
-  <div class="modal-overlay" id="success-modal" data-cy="successModal" style="display:none;">
+  <div class="modal-overlay" id="successModal" data-cy="successModal" style="display:none;">
     <div class="modal-dialog">
       <div class="modal-content" data-cy="modalContent">
         <div class="modal-header">
@@ -169,7 +169,7 @@
         </div>
         <div class="modal-body">
           <table data-cy="resultTable">
-            <tbody id="result-tbody"></tbody>
+            <tbody id="resultTbody"></tbody>
           </table>
         </div>
         <div class="modal-footer">
